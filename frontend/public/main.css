@@ -1,0 +1,27 @@
+body {
+  background-color: #EFFAFF;
+}
+
+.app-txt-primary {
+  color: #3DA5D9
+}
+
+.app-bg-primary {
+  background-color: #3DA5D9
+}
+
+.app-txt-secondary {
+  color: #ED6A5E
+}
+
+.app-bg-secondary {
+  background-color: #ED6A5E
+}
+
+
+.form-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}

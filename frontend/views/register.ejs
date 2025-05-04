@@ -1,0 +1,26 @@
+<%- include('partials/header'); -%>
+
+<!-- Register Form -->
+<div class="container d-flex flex-column align-items-center">
+  <h2 class="text-center app-txt-secondary mt-3">Register</h2>
+  <div class="form-container mt-3 col-md-6 col-lg-4">
+    <h5 class="text-center mb-3">Input your information</h5>
+    <form id="register_form">
+      <div class="mb-3">
+        <label class="form-label">Enter your name</label>
+        <input id="input_name" name="input_name" type="text" class="form-control" placeholder="Name">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Enter your email</label>
+        <input id="input_email" name="input_email" type="email" class="form-control" placeholder="email@domain.com">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Enter your password</label>
+        <input id="input_password" name="input_password" type="password" class="form-control" placeholder="password">
+      </div>
+      <button id="register_btn" type="submit" class="btn btn-primary w-100 mt-3">Register</button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer'); -%>
