@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const isAuthenticated = require('./middlewares/authentication')
 // Setup server
 const express = require("express");
 
@@ -15,64 +16,25 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-// Routing
-app.use(async (req, res, next) => {
-  try {
-    const cookies = req.headers.cookie;
-    const response = await fetch('http://localhost:3030/api/account/status', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': cookies
-      },
-    });
-
-    const data = await response.json();
-    console.log(`Login status: ${data.loggedIn}`)
-
-    res.locals.loggedIn = data.loggedIn;
-    res.locals.user = data.user || null;
-  } catch (err) {
-    res.locals.loggedIn = false;
-    res.locals.user = null;
-  }
-  next();
-});
-
 // Routing (default)
-app.get('/', (req, res) => {
+app.get('/', isAuthenticated, (req, res) => {
   res.render('home', { session: res.locals.user });
 });
-app.get('/register', (req, res) => {
-  if (res.locals.loggedIn) {
-    return res.redirect('/');
-  }
+app.get('/register', isAuthenticated, (req, res) => {
   res.render('register', { session: res.locals.user });
 });
-app.get('/login', (req, res) => {
-  if (res.locals.loggedIn) {
-      return res.redirect('/');
-  }
+app.get('/login', isAuthenticated, (req, res) => {
   res.render('login', { session: res.locals.user });
 });
 
 // Routing (authenticated)
-app.get('/account', (req, res) => {
-  if (!res.locals.loggedIn) {
-      return res.redirect('/');
-  }
+app.get('/account', isAuthenticated, (req, res) => {
   res.render('account', { session: res.locals.user });
 });
-app.get('/expense', (req, res) => {
-  if (!res.locals.loggedIn) {
-      return res.redirect('/');
-  }
+app.get('/expense', isAuthenticated, (req, res) => {
   res.render('expense', { session: res.locals.user });
 });
-app.get('/category', (req, res) => {
-  if (!res.locals.loggedIn) {
-      return res.redirect('/');
-  }
+app.get('/category', isAuthenticated, (req, res) => {
   res.render('category', { session: res.locals.user });
 });
 
