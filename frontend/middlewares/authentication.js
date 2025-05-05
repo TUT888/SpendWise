@@ -1,5 +1,6 @@
 async function isAuthenticated(req, res, next) {
   const cookies = req.headers.cookie;
+  console.log("FETCH STATUS: ", `${process.env.ACCOUNT_SERVICE_URL}/api/account/status`);
   // Communicate with account service to verify credentials
   const response = await fetch(`${process.env.ACCOUNT_SERVICE_URL}/api/account/status`, {
     method: 'GET',

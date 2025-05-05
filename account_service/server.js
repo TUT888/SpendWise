@@ -13,11 +13,11 @@ app.use(express.urlencoded({ extended: false }));
 const session = require("express-session");
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoStore = new MongoDBStore({
-  uri: process.env.MONGODB_URL,
+  uri: process.env.MONGO_URL,
   collection: "user_sessions"
 });
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || "MySecret",
     resave: false,
     saveUninitialized: false,
     store: mongoStore,
