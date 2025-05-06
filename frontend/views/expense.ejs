@@ -1,8 +1,76 @@
 <%- include('partials/header'); -%>
 
-<!-- Welcome Section -->
-<div class="container-fluid pt-5">
-  <h2 class="text-center app-txt-secondary">Expense</h2>
+<!-- Main Content -->
+<span id="user_email" hidden><%= session.email %></span>
+<div class="container-fluid pt-5 px-5">
+  <div class="d-flex justify-content-between mb-3">
+    <h3>Recent expense</h3>
+    <button type="button" class="btn btn-sm btn-primary add-expense-btn" data-bs-toggle="modal" data-bs-target="#expenseFormModal">Add expense</button>
+  </div>
+
+  <table class="table bg-white rounded">
+    <thead class="table-light">
+      <tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (all_expenses) { 
+        all_expenses.forEach(function (expense) { %>
+          <tr>
+            <td class="expense-date-col"><%= expense.date.split("T")[0] %></td>
+            <td class="expense-category-col"><%= expense.category_name %></td>
+            <td class="expense-description-col"><%= expense.description %></td>
+            <td class="expense-amount-col"><%= expense.amount %></td>
+            <td>
+              <button data-expense-id="<%= expense._id %>" class="btn btn-sm btn-primary edit-expense-btn" 
+                data-bs-toggle="modal" data-bs-target="#expenseFormModal">Edit</button>
+              <button data-expense-id="<%= expense._id %>" class="btn btn-sm btn-danger delete-expense-btn">Delete</button>
+            </td>
+          </tr>
+        <% })
+      } %>
+    </tbody>
+  </table>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="expenseFormModal" tabindex="-1" aria-labelledby="expenseFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 id="expense_form_title" class="modal-title fs-5" id="expenseFormModalLabel">Add new expense</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form -->
+        <form id="expense_form" data-expense-id="">
+          <div class="mb-3">
+            <label class="form-label">Enter category</label>
+            <input id="input_category" name="input_category" type="text" class="form-control" placeholder="Spending category">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Enter description</label>
+            <input id="input_description" name="input_description" type="text" class="form-control" placeholder="Your spending detail">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Enter amount</label>
+            <input id="input_amount" name="input_amount" type="number" class="form-control" placeholder="$0">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button id="edit_expense_btn" type="button" class="btn btn-info">Save changes</button>
+        <button id="add_expense_btn" type="button" class="btn btn-primary">Add expense</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="js/expense.js"></script>
 <%- include('partials/footer'); -%>

@@ -5,13 +5,14 @@ const LOGOUT_API_URL = `${ACCOUNT_SERVICE_URL}/api/account/logout`;
 console.log("REGISTER_API_URL: ", REGISTER_API_URL)
 console.log("LOGIN_API_URL: ", LOGIN_API_URL)
 console.log("LOGOUT_API_URL: ", LOGOUT_API_URL)
+
 $("#logout_button").click(function () {
   console.log("Click");
   $.ajax({
     url: LOGOUT_API_URL,
     type: "POST",
     xhrFields: {
-      withCredentials: true // crucial: sends cookies
+      withCredentials: true
     },
     success: (result) => {
       console.log("Logged out successfully");
@@ -43,7 +44,7 @@ $(document).on("click", "#login_btn", () => {
     contentType: 'application/json',
     data: JSON.stringify(formData),
     xhrFields: {
-      withCredentials: true // crucial: sends cookies
+      withCredentials: true
     },
     success: (result) => {
       console.log("SUCCESS")
@@ -79,7 +80,7 @@ $(document).on("click", "#register_btn", () => {
     contentType: 'application/json',
     data: JSON.stringify(formData),
     xhrFields: {
-      withCredentials: true // crucial: sends cookies
+      withCredentials: true
     },
     success: (result) => {
       console.log("SUCCESS")

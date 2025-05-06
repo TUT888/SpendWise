@@ -75,6 +75,7 @@ const login = async (req, res) => {
     req.session.user = {
         id: user._id,
         email: user.email,
+        name: user.name
     };
     console.log("Session created:", req.session);
 

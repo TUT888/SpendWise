@@ -1,9 +1,17 @@
 <%- include('partials/header'); -%>
 
-
-<!-- Welcome Section -->
-<div class="container-fluid pt-5">
-  <h2 class="text-center app-txt-secondary">Account</h2>
+<div class="container d-flex justify-content-center pt-5">
+  <div class="card p-4 bg-white" style="min-width: 300px;">
+    <h5 class="text-center pb-2 mb-2 border-bottom">Account Information</h5>
+    <div class="mb-2 d-flex justify-content-between">
+      <strong>Name</strong>
+      <span><%= session.name %></span>
+    </div>
+    <div class="mb-2 d-flex justify-content-between">
+      <strong>Email</strong>
+      <span><%= session.email %></span>
+    </div>
+  </div>
 </div>
 
 <%- include('partials/footer'); -%>

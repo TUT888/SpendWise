@@ -1,8 +1,9 @@
+const CHECK_AUTHENTICATION_STATUS_URL = `${process.env.ACCOUNT_SERVICE_URL}/api/account/status`;
+
 async function isAuthenticated(req, res, next) {
   const cookies = req.headers.cookie;
-  console.log("FETCH STATUS: ", `${process.env.ACCOUNT_SERVICE_URL}/api/account/status`);
   // Communicate with account service to verify credentials
-  const response = await fetch(`${process.env.ACCOUNT_SERVICE_URL}/api/account/status`, {
+  const response = await fetch(CHECK_AUTHENTICATION_STATUS_URL, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -12,6 +13,7 @@ async function isAuthenticated(req, res, next) {
   const data = await response.json();
   console.log(`Login status: ${data.loggedIn}`)
 
+  // Store user data per request -> render corresponding data in UI
   res.locals.loggedIn = data.loggedIn;
   res.locals.user = data.user || null;
   
