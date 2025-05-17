@@ -1,15 +1,15 @@
-const REGISTER_API_URL = `${ACCOUNT_SERVICE_URL}/api/account/register`;
-const LOGIN_API_URL = `${ACCOUNT_SERVICE_URL}/api/account/login`;
-const LOGOUT_API_URL = `${ACCOUNT_SERVICE_URL}/api/account/logout`;
+// const REGISTER_API_URL = `${ACCOUNT_SERVICE_URL}/api/account/register`;
+// const LOGIN_API_URL = `${ACCOUNT_SERVICE_URL}/api/account/login`;
+// const LOGOUT_API_URL = `${ACCOUNT_SERVICE_URL}/api/account/logout`;
 
-console.log("REGISTER_API_URL: ", REGISTER_API_URL)
-console.log("LOGIN_API_URL: ", LOGIN_API_URL)
-console.log("LOGOUT_API_URL: ", LOGOUT_API_URL)
+// console.log("REGISTER_API_URL: ", REGISTER_API_URL)
+// console.log("LOGIN_API_URL: ", LOGIN_API_URL)
+// console.log("LOGOUT_API_URL: ", LOGOUT_API_URL)
 
 $("#logout_button").click(function () {
   console.log("Click");
   $.ajax({
-    url: LOGOUT_API_URL,
+    url: "/logout",
     type: "POST",
     xhrFields: {
       withCredentials: true
@@ -39,7 +39,7 @@ $(document).on("click", "#login_btn", () => {
   console.log(formData);
 
   $.ajax({
-    url: LOGIN_API_URL,
+    url: "/login",
     type: "POST",
     contentType: 'application/json',
     data: JSON.stringify(formData),
@@ -75,7 +75,7 @@ $(document).on("click", "#register_btn", () => {
   console.log(formData);
 
   $.ajax({
-    url: REGISTER_API_URL,
+    url: "/register",
     type: "POST",
     contentType: 'application/json',
     data: JSON.stringify(formData),

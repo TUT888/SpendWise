@@ -1,6 +1,6 @@
-const EXPENSE_URL = `${EXPENSE_SERVICE_URL}/api/expense`;
+// const EXPENSE_URL = `${EXPENSE_SERVICE_URL}/api/expense`;
 
-console.log("EXPENSE_URL: ", EXPENSE_URL)
+// console.log("EXPENSE_URL: ", EXPENSE_URL)
 
 // Trigger openning expense modal
 $(document).on('click', '.add-expense-btn', function () {
@@ -41,7 +41,7 @@ $(document).on('click', '.delete-expense-btn', function () {
   }
 
   $.ajax({
-    url: EXPENSE_URL,
+    url: "/expense",
     type: "DELETE",
     contentType: 'application/json',
     data: JSON.stringify(formData),
@@ -78,7 +78,7 @@ $(document).on("click", "#add_expense_btn", () => {
   }
   
   $.ajax({
-    url: EXPENSE_URL,
+    url: "/expense",
     type: "POST",
     contentType: 'application/json',
     data: JSON.stringify(formData),
@@ -113,7 +113,7 @@ $(document).on("click", "#edit_expense_btn", () => {
   }
   
   $.ajax({
-    url: EXPENSE_URL,
+    url: "/expense",
     type: "PUT",
     contentType: 'application/json',
     data: JSON.stringify(formData),

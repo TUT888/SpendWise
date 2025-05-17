@@ -16,42 +16,88 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Access API from outside of services network, access via browser (localhost)
-const isAuthenticated = require('./middlewares/authentication')
-const SERVICES = {
-  ACCOUNT: "http://localhost:" + process.env.ACCOUNT_SERVICE_URL.split(":").pop(),
-  EXPENSE: "http://localhost:" + process.env.EXPENSE_SERVICE_URL.split(":").pop()
-}
+// const isAuthenticated = require('./middlewares/authentication')
+// const SERVICES = {
+//   ACCOUNT: "http://localhost:" + process.env.ACCOUNT_SERVICE_URL.split(":").pop(),
+//   EXPENSE: "http://localhost:" + process.env.EXPENSE_SERVICE_URL.split(":").pop()
+// }
+
+const checkLogin = require('./middlewares/checkLogin')
+const requireAuth = require('./middlewares/requireAuth')
+
+app.use(checkLogin);
 
 // Routing
-app.get('/', isAuthenticated, (req, res) => {
-  res.render('home', {
-    session: res.locals.user,
-    service_api: SERVICES
-  });
+app.get('/', (req, res) => {
+  res.render('home', { session: res.locals.user });
 });
 
-app.get('/register', isAuthenticated, (req, res) => {
-  res.render('register', {
-    session: res.locals.user,
-    service_api: SERVICES
-  });
+// ========== Register route ========== //
+app.get('/register', (req, res) => {
+  if (res.locals.loggedIn) return res.redirect('/');
+  res.render('register', { session: res.locals.user });
 });
 
-app.get('/login', isAuthenticated, (req, res) => {
-  res.render('login', {
-    session: res.locals.user,
-    service_api: SERVICES
+app.post('/register', async (req, res) => {
+  if (res.locals.loggedIn) return res.redirect('/');
+
+  const cookies = req.headers.cookie;
+  var response = await fetch(`${process.env.ACCOUNT_SERVICE_URL}/api/account/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': cookies
+    },
+    body: JSON.stringify(req.body)
   });
+  var result = await response.json();
+  return res.status(response.status).json({ result });
 });
 
-app.get('/account', isAuthenticated, (req, res) => {
-  res.render('account', {
-    session: res.locals.user,
-    service_api: SERVICES
-  });
+// ========== Login route ========== //
+app.get('/login', (req, res) => {
+  if (res.locals.loggedIn) return res.redirect('/');
+  res.render('login', { session: res.locals.user });
 });
 
-app.get('/expense', isAuthenticated, async (req, res) => {
+app.post('/login', async (req, res) => {
+  if (res.locals.loggedIn) return res.redirect('/');
+
+  const cookies = req.headers.cookie;
+  var response = await fetch(`${process.env.ACCOUNT_SERVICE_URL}/api/account/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': cookies
+    },
+    body: JSON.stringify(req.body)
+  });
+  var result = await response.json();
+  return res.status(response.status).json({ result });
+});
+
+// ========== Logout route ========== //
+app.post('/logout', requireAuth, async (req, res) => {
+  const cookies = req.headers.cookie;
+  var response = await fetch(`${process.env.ACCOUNT_SERVICE_URL}/api/account/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': cookies
+    }
+  });
+  
+  var result = await response.json();
+  return res.status(response.status).json({ result });
+});
+
+// ========== Account route ========== //
+app.get('/account', requireAuth, (req, res) => {
+  res.render('account', { session: res.locals.user });
+});
+
+// ========== Expense route ========== //
+app.get('/expense', requireAuth, async (req, res) => {
   const user_email = res.locals.user.email;
   const cookies = req.headers.cookie;
   // get expense data
@@ -67,9 +113,50 @@ app.get('/expense', isAuthenticated, async (req, res) => {
   // render
   res.render('expense', {
     session: res.locals.user,
-    service_api: SERVICES,
     all_expenses: expenseData.expense
   });
+});
+ 
+app.post('/expense', requireAuth, async (req, res) => {
+  const cookies = req.headers.cookie;
+  var response = await fetch(`${process.env.EXPENSE_SERVICE_URL}/api/expense`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': cookies
+    },
+    body: JSON.stringify(req.body)
+  });
+  var result = await response.json();
+  return res.status(response.status).json({ result });
+});
+
+app.put('/expense', requireAuth, async (req, res) => {
+  const cookies = req.headers.cookie;
+  var response = await fetch(`${process.env.EXPENSE_SERVICE_URL}/api/expense`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': cookies
+    },
+    body: JSON.stringify(req.body)
+  });
+  var result = await response.json();
+  return res.status(response.status).json({ result });
+});
+
+app.delete('/expense', requireAuth, async (req, res) => {
+  const cookies = req.headers.cookie;
+  var response = await fetch(`${process.env.EXPENSE_SERVICE_URL}/api/expense`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': cookies
+    },
+    body: JSON.stringify(req.body)
+  });
+  var result = await response.json();
+  return res.status(response.status).json({ result });
 });
 
 // Start server
