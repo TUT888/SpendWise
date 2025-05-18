@@ -4,7 +4,7 @@ require("dotenv").config();
 const express = require("express");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3030;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 const session = require("express-session");
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoStore = new MongoDBStore({
-  uri: process.env.MONGO_URL,
+  uri: process.env.MONGO_URI,
   collection: "user_sessions"
 });
 app.use(session({
@@ -23,17 +23,10 @@ app.use(session({
     store: mongoStore,
     cookie: {
       // maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
-      maxAge: 1000 * 60 * 2 // 15 min
+      maxAge: 1000 * 60 * 15 // 15 min
     },
   })
 );
-
-// Enable CORS for frontend origin
-const cors = require('cors');
-app.use(cors({
-  origin: process.env.FRONTEND_ORIGIN,
-  credentials: true // for using cookies or authentication headers
-}));
 
 require("./database/connectDB");
 app.use("/api/account", require('./routes/accountRouter'))

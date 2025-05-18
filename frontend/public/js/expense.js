@@ -1,7 +1,3 @@
-// const EXPENSE_URL = `${EXPENSE_SERVICE_URL}/api/expense`;
-
-// console.log("EXPENSE_URL: ", EXPENSE_URL)
-
 // Trigger openning expense modal
 $(document).on('click', '.add-expense-btn', function () {
   $("#expense_form_title").html("Add new expense");
@@ -19,7 +15,6 @@ $(document).on('click', '.edit-expense-btn', function () {
 
   let table_row = $(this).parent().parent();
   
-  let input_date = table_row.find(".expense-date-col").html();
   let input_category_name = table_row.find(".expense-category-col").html();
   let input_description = table_row.find(".expense-description-col").html();
   let input_amount = table_row.find(".expense-amount-col").html();

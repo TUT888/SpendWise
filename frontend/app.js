@@ -15,13 +15,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-// Access API from outside of services network, access via browser (localhost)
-// const isAuthenticated = require('./middlewares/authentication')
-// const SERVICES = {
-//   ACCOUNT: "http://localhost:" + process.env.ACCOUNT_SERVICE_URL.split(":").pop(),
-//   EXPENSE: "http://localhost:" + process.env.EXPENSE_SERVICE_URL.split(":").pop()
-// }
-
+// Authentication
 const checkLogin = require('./middlewares/checkLogin')
 const requireAuth = require('./middlewares/requireAuth')
 
@@ -63,6 +57,7 @@ app.get('/login', (req, res) => {
 app.post('/login', async (req, res) => {
   if (res.locals.loggedIn) return res.redirect('/');
 
+  console.log("LOGIN: ", req.body)
   const cookies = req.headers.cookie;
   var response = await fetch(`${process.env.ACCOUNT_SERVICE_URL}/api/account/login`, {
     method: 'POST',
@@ -72,6 +67,11 @@ app.post('/login', async (req, res) => {
     },
     body: JSON.stringify(req.body)
   });
+
+  const setCookieHeader = response.headers.get('set-cookie');
+  if (setCookieHeader) {
+    res.setHeader('set-cookie', setCookieHeader);
+  }
   var result = await response.json();
   return res.status(response.status).json({ result });
 });

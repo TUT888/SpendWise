@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accountsvc-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accountsvc
+  template:
+    metadata:
+      labels:
+        app: accountsvc
+    spec:
+      containers:
+      - name: accountsvc-container
+        image: tut888/sit737-account-service:latest
+        ports:
+        - containerPort: 3030
+        env:
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: my-mongo-secret
+              key: mongo-user  # App gets MongoDB username from Secret
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: my-mongo-secret
+              key: mongo-password  # App gets MongoDB password from Secret
+        - name: MONGO_URI
+          value: "mongodb://$(MONGO_USER):$(MONGO_PASSWORD)@my-mongo-svc:27017/spendwise?authSource=admin"
+---
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: accountsvc-service
+spec: 
+  selector:
+    app: accountsvc
+  ports: 
+    - port: 3330
+      targetPort: 3030
