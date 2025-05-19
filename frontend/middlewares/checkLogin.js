@@ -12,7 +12,6 @@ async function checkLogin(req, res, next) {
       },
     });
     const data = await response.json();
-    console.log(`Login status: ${data.loggedIn}`)
 
     // Store user data per request
     res.locals.loggedIn = data.loggedIn;

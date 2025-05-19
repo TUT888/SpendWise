@@ -1,0 +1,56 @@
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  undefined","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  undefined","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  undefined","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed, user email is invalid","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  undefined","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: session created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: session destroyed, logout successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  undefined","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  undefined","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  undefined","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: session created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session:  [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: session destroyed, logout successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session unavailable","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session unavailable","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session unavailable","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /register: registration successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session unavailable","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session unavailable","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: session created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: session destroyed, logout successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, session unavailable","service":"account"}

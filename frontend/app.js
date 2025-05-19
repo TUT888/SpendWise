@@ -15,13 +15,39 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// Logging
+const winston = require('winston');
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { 
+    service: 'frontend'
+  },
+  transports: [
+    new winston.transports.File({ filename: 'logs/combined.log' }),
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+  ],
+});
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(new winston.transports.Console({
+    format: winston.format.simple(),
+  }));
+}
+
 // Authentication
 const checkLogin = require('./middlewares/checkLogin')
 const requireAuth = require('./middlewares/requireAuth')
 
+// ========== Start Routing ========== //
 app.use(checkLogin);
+app.use((req, res, next) => {
+  let req_url = req.url;
+  let req_method = req.method;
+  let user = res.locals.user ? res.locals.user.email : "none";
+  logger.info(`[FRONTEND] ${req_method} at ${req_url}: request received with login status ${res.locals.loggedIn}, user: ${user}`);
+  next();
+});
 
-// Routing
 app.get('/', (req, res) => {
   res.render('home', { session: res.locals.user });
 });
@@ -57,7 +83,6 @@ app.get('/login', (req, res) => {
 app.post('/login', async (req, res) => {
   if (res.locals.loggedIn) return res.redirect('/');
 
-  console.log("LOGIN: ", req.body)
   const cookies = req.headers.cookie;
   var response = await fetch(`${process.env.ACCOUNT_SERVICE_URL}/api/account/login`, {
     method: 'POST',

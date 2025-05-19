@@ -1,0 +1,2 @@
+{"level":"error","message":"[EXPENSE] PUT at /: update expense failed with Internal Server Error: ReferenceError: user_email is not defined","service":"expense"}
+{"level":"error","message":"[EXPENSE] PUT at /: update expense failed with Internal Server Error: ReferenceError: user_email is not defined","service":"expense"}
