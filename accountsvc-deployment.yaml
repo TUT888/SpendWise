@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
       - name: accountsvc-container
+        # image: australia-southeast1-docker.pkg.dev/sit737-25t1-alice-tat-4c385fc/sit737-spendwise/sit737-account-service:latest
         image: tut888/sit737-account-service:latest
         ports:
         - containerPort: 3030
@@ -36,6 +37,7 @@ kind: Service
 metadata: 
   name: accountsvc-service
 spec: 
+  type: ClusterIP
   selector:
     app: accountsvc
   ports: 
