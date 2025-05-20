@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontendsvc-container
-        image: tut888/sit737-frontend-service:latest
+        image: tut888/sit737-frontend-service:latest # pull from docker hub
         ports:
         - containerPort: 3080
         env:

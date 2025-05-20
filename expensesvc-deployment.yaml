@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: expensesvc-container
-        image: tut888/sit737-expense-service:latest
+        image: tut888/sit737-expense-service:latest # pull from docker hub
         ports:
         - containerPort: 3032
         env:

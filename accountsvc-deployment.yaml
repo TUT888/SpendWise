@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: accountsvc-container
-        image: tut888/sit737-account-service:latest
+        image: tut888/sit737-account-service:latest # pull from docker hub
         ports:
         - containerPort: 3030
         env:
