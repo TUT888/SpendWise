@@ -14,7 +14,6 @@ spec:
     spec:
       containers:
       - name: frontendsvc-container
-        # image: australia-southeast1-docker.pkg.dev/sit737-25t1-alice-tat-4c385fc/sit737-spendwise/sit737-frontend-service:latest
         image: tut888/sit737-frontend-service:latest
         ports:
         - containerPort: 3080
