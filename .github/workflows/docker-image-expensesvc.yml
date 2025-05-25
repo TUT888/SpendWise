@@ -5,10 +5,11 @@ on:
     branches: [ "develop" ]
     paths:
       - "expense_service/**"
+      - "github/workflows/docker-image-expensesvc.yaml"
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latests
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
