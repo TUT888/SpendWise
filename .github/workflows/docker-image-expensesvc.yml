@@ -20,6 +20,7 @@ jobs:
       - name: Run test for expense service
         env:
           MONGO_URI: mongodb://localhost:27017/spendwise
+          ACCOUNT_SERVICE_URL: http://localhost:3032
         run: | 
           cd expense_service
           npm install
