@@ -5,7 +5,7 @@ on:
     branches: [ "develop" ]
     paths:
       - "expense_service/**"
-      - "github/workflows/docker-image-expensesvc.yaml"
+      - ".github/workflows/docker-image-expensesvc.yaml"
 
 jobs:
   build:

@@ -5,7 +5,7 @@ on:
     branches: [ "develop" ]
     paths:
       - "account_service/**"
-      - "github/workflows/docker-image-accountsvc.yaml"
+      - ".github/workflows/docker-image-accountsvc.yaml"
 
 jobs:
   build:
