@@ -22,7 +22,6 @@ app.use(session({
     saveUninitialized: false,
     store: mongoStore,
     cookie: {
-      // maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
       maxAge: 1000 * 60 * 15 // 15 min
     },
   })

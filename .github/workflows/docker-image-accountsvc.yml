@@ -3,14 +3,8 @@ name: Docker Image CI - Account Sevice
 on:
   push:
     branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
-
-env:
-  GKE_CLUSTER: simple-k8s-cluster
-  GKE_ZONE: australia-southeast1-b
-  DEPLOYMENT_NAME: accountsvc-deployment
-  CONTAINER_NAME: accountsvc-container
+    paths:
+      - "account_service/**"
 
 jobs:
   build:
@@ -22,14 +16,16 @@ jobs:
       - name: Start MongoDB container
         run: docker run -d -p 27017:27017 --name test-mongo mongo:6
       
-      - name: Install dependencies and run test
+      # Test
+      - name: Run test for account service
         env:
           MONGO_URI: mongodb://localhost:27017/spendwise
         run: | 
           cd account_service
           npm install
           npm test
-
+      
+      # Containerization
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -38,7 +34,7 @@ jobs:
           
       - name: Build and push Docker image
         run: |
-          docker build -t tut888/sit737-account-service:${{ github.sha }} .
+          docker build -t tut888/sit737-account-service:${{ github.sha }} ./account_service
           docker push tut888/sit737-account-service:${{ github.sha }}
       
       # Below code is not working due to limited permission
@@ -51,6 +47,6 @@ jobs:
       
       # - name: Deploy updated image to GKE
       #   run: |
-      #     gcloud container clusters get-credentials {{ env.GKE_CLUSTER }} --location={{ env.GKE_ZONE }}
-      #     kubectl set image deployment/{{ env.DEPLOYMENT_NAME }} {{ env.CONTAINER_NAME }}=tut888/sit737-account-service:{{ github.sha }}
-      #     kubectl rollout status deployment/{{ env.DEPLOYMENT_NAME }}
+      #     gcloud container clusters get-credentials simple-k8s-cluster --location=australia-southeast1-b
+      #     kubectl set image deployment/accountsvc-deployment accountsvc-container=tut888/sit737-account-service:{{ github.sha }}
+      #     kubectl rollout status deployment/accountsvc-deployment
