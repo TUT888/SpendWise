@@ -1,0 +1,38 @@
+name: Docker Image CI - Expense Sevice
+
+on:
+  push:
+    branches: [ "develop" ]
+    paths:
+      - "expense_service/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      
+      - name: Start MongoDB container
+        run: docker run -d -p 27017:27017 --name test-mongo mongo:6
+      
+      # Test
+      - name: Run test for expense service
+        env:
+          MONGO_URI: mongodb://localhost:27017/spendwise
+        run: | 
+          cd expense_service
+          npm install
+          npm test
+      
+      # Containerization
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Build and push Docker image
+        run: |
+          docker build -t tut888/sit737-expense-service:${{ github.sha }} ./expense_service
+          docker push tut888/sit737-expense-service:${{ github.sha }}

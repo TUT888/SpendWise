@@ -9,4 +9,4 @@
 {"level":"info","message":"[EXPENSE] GET at /?user_email=alice@gmail.com: get expense successful for alice@gmail.com","service":"expense"}
 {"level":"info","message":"[EXPENSE] GET at /?user_email=alice@gmail.com: get expense successful for alice@gmail.com","service":"expense"}
 {"level":"info","message":"[EXPENSE] DELETE at /: delete expense 68299f452a540961faee9736 successful","service":"expense"}
-{"level":"info","message":"[EXPENSE] GET at /?user_email=alice@gmail.com: get expense successful for alice@gmail.com","service":"expense"}
+{"level":"info","message":"[ACCOUNT] POST at /login: session created, login successful","service":"account"}
