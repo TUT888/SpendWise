@@ -186,11 +186,11 @@ kubectl logs <POD-NAME>
 ```
 
 Example output from the account service:
-> Server started: http://localhost:3030
-> Connected to MongoDB
-> info: [ACCOUNT] GET at /status: request received, session unavailable {"service":"account"}
-> info: [ACCOUNT] GET at /status: request received, session unavailable {"service":"account"}
-> error: [ACCOUNT] POST at /login: login failed, user email is invalid {"service":"account"}
+> Server started: http://localhost:3030 <br>
+> Connected to MongoDB <br>
+> info: [ACCOUNT] GET at /status: request received, session unavailable {"service":"account"} <br>
+> info: [ACCOUNT] GET at /status: request received, session unavailable {"service":"account"} <br>
+> error: [ACCOUNT] POST at /login: login failed, user email is invalid {"service":"account"} <br>
 > info: [ACCOUNT] GET at /status: request received, session unavailable {"service":"account"}
 
 # Project clean up (Optional)
