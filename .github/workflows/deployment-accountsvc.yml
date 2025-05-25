@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI - Account Sevice
 
 on:
   push:
@@ -19,10 +19,13 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
       
-      # - name: Install dependencies and run test
-      #   run: | 
-      #     npm install
-      #     npm test
+      - name: Start MongoDB container
+        run: docker run -d -p 27017:27017 --name test-mongo mongo:6
+      
+      - name: Install dependencies and run test
+        run: | 
+          npm install
+          npm test
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -35,17 +38,16 @@ jobs:
           docker build -t tut888/sit737-account-service:${{ github.sha }} ./account_service
           docker push tut888/sit737-account-service:${{ github.sha }}
       
-      # Setup gcloud CLI
-      - uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GKE_SA_KEY }}
+      # Below code is not working due to limited permission
+      # - uses: google-github-actions/auth@v2
+      #   with:
+      #     credentials_json: {{ secrets.GKE_SA_KEY }}
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
+      # - name: Set up Cloud SDK
+      #   uses: google-github-actions/setup-gcloud@v2
       
-      # Deploy updated image to GKE
-      - name: Deploy updated image to GKE
-        run: |
-          gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --location=${{ env.GKE_ZONE }}
-          kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} ${{ env.CONTAINER_NAME }}=tut888/sit737-account-service:${{ github.sha }}
-          kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }}
+      # - name: Deploy updated image to GKE
+      #   run: |
+      #     gcloud container clusters get-credentials {{ env.GKE_CLUSTER }} --location={{ env.GKE_ZONE }}
+      #     kubectl set image deployment/{{ env.DEPLOYMENT_NAME }} {{ env.CONTAINER_NAME }}=tut888/sit737-account-service:{{ github.sha }}
+      #     kubectl rollout status deployment/{{ env.DEPLOYMENT_NAME }}
