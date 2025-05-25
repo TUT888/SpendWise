@@ -24,6 +24,7 @@ const logError = (method, url, message) => {
 }
 
 module.exports = {
+  logger,
   logInfo,
   logError
 };
