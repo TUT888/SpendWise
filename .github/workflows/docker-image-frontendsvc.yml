@@ -31,8 +31,9 @@ jobs:
       - name: Run test for frontend service
         env:
           PORT: 3081
-          ACCOUNT_SERVICE_URL: http://localhost:3030
-          EXPENSE_SERVICE_URL: http://localhost:3032
+          NODE_ENV: test
+          MONGO_URI: mongodb://localhost:27017/spendwise
+          GITHUB_ACTION: true
         run: | 
           cd frontend
           npm install
