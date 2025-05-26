@@ -1,2 +1,9 @@
 node_modules
 .env
+cypress/
+cypress.config.js
+cypress.config.ts
+*.cy.js
+*.spec.js
+*.spec.ts
+cypress.env.json

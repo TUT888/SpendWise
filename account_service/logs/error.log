@@ -2,3 +2,7 @@
 {"level":"error","message":"[ACCOUNT] POST at /register: registration failed with Internal Server Error: MongoServerError: E11000 duplicate key error collection: spendwise.users index: email_1 dup key: { email: \"sampletestuser@gmail.com\" }","service":"account"}
 {"level":"error","message":"[ACCOUNT] POST at /register: registration failed with Internal Server Error: MongoServerError: E11000 duplicate key error collection: spendwise.users index: email_1 dup key: { email: \"sampletestuser@gmail.com\" }","service":"account"}
 {"level":"error","message":"[ACCOUNT] POST at /register: registration failed with Internal Server Error: MongoServerError: E11000 duplicate key error collection: spendwise.users index: email_1 dup key: { email: \"sampletestuser@gmail.com\" }","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed, user email is invalid","service":"account"}
+{"level":"error","message":"[ACCOUNT] DELETE at /: delete account failed, user email is invalid","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /register: registration failed with Internal Server Error: MongoServerError: E11000 duplicate key error collection: spendwise.users index: email_1 dup key: { email: \"sampletestuser@gmail.com\" }","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /register: registration failed with Internal Server Error: MongoServerError: E11000 duplicate key error collection: spendwise.users index: email_1 dup key: { email: \"sampletestuser@gmail.com\" }","service":"account"}

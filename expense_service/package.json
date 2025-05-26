@@ -4,6 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start:dev": "nodemon server.js",
+    "start:test": "cross-env NODE_ENV=test node server.js",
     "test": "mocha --exit"
   },
   "author": "Alice Tat",
