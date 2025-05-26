@@ -1,4 +1,5 @@
 // require("dotenv").config();
+require("../server");
 const User = require("../models/user");
 
 const chaiHttp = require("chai-http");
@@ -7,7 +8,8 @@ const { expect } = chai;
 
 // Setup 
 chai.use(chaiHttp);
-const server = require("../server");
+const server = `http://localhost:${process.env.PORT || 3030}`
+
 const { logger } = require("../logger");
 
 const testUserName = "Sample Test User";
