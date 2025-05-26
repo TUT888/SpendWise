@@ -1,7 +1,4 @@
 // require("dotenv").config();
-require("../server");
-const User = require("../models/user");
-
 const chaiHttp = require("chai-http");
 const chai = require("chai");
 const { expect } = chai;
@@ -10,19 +7,15 @@ const { expect } = chai;
 chai.use(chaiHttp);
 const server = `http://localhost:${process.env.PORT || 3030}`
 
-const { logger } = require("../logger");
-
 const testUserName = "Sample Test User";
 const testUserEmail = "sampletestuser@gmail.com";
 const testUserPass = "sampletestuser";
 
-before(() => {
-  logger.silent = true;
-})
-
 after(async () => {
-  logger.silent = false;
-  await User.deleteOne({ email: testUserEmail })
+  await chai.request(server)
+            .delete("/api/account")
+            .set('Cookie', cookie)
+            .send({ email: testUserEmail, password: testUserPass })
 });
 
 // Testing

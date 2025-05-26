@@ -24,6 +24,7 @@ jobs:
         run: | 
           cd account_service
           npm install
+          npm run start:test
           npm test
       
       # Containerization
