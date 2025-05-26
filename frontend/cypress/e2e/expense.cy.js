@@ -8,7 +8,7 @@ describe("SpendWise E2E account management test", () => {
     process.env.EXPENSE_SERVICE_URL = process.env.EXPENSE_SERVICE_URL || `http://localhost:3032`;
   }
 
-  console.log(`Testing E2E with accountsvc: ${process.env.ACCOUNT_SERVICE_URL}, expensesvc: ${process.env.EXPENSE_SERVICE_URL}`);
+  console.log(`Testing E2E with expensesvc: ${process.env.ACCOUNT_SERVICE_URL}, expensesvc: ${process.env.EXPENSE_SERVICE_URL}`);
   const frontend_url = `http://localhost:${process.env.PORT || 3081}/`;
   const account_url = process.env.ACCOUNT_SERVICE_URL;
   

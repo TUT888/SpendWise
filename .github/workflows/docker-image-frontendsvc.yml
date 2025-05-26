@@ -33,7 +33,7 @@ jobs:
           PORT: 3081
           NODE_ENV: test
           MONGO_URI: mongodb://localhost:27017/spendwise
-          GITHUB_ACTION: true
+          GITHUB_ACTION: "true"
         run: | 
           cd frontend
           npm install
