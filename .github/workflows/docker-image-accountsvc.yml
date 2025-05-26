@@ -18,17 +18,11 @@ jobs:
         run: docker run -d -p 27017:27017 --name test-mongo mongo:6
       
       # Test
-      - name: Run account service
-        env:
-          PORT: 3030
-          MONGO_URI: mongodb://localhost:27017/spendwise
-        run: | 
-          cd account_service
-          npm run start:test
-
       - name: Run test for account service
         env:
           PORT: 3030
+          NODE_ENV: test
+          MONGO_URI: mongodb://localhost:27017/spendwise
         run: | 
           cd account_service
           npm install
