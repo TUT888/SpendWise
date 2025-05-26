@@ -2,7 +2,7 @@ name: Docker Image CI - Frontend Sevice
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
     paths:
       - "frontend/**"
       - ".github/workflows/docker-image-frontendsvc.yml"

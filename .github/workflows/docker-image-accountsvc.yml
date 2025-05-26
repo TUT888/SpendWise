@@ -2,7 +2,7 @@ name: Docker Image CI - Account Sevice
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
     paths:
       - "account_service/**"
       - ".github/workflows/docker-image-accountsvc.yml"

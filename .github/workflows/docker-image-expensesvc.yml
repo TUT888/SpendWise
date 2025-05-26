@@ -2,7 +2,7 @@ name: Docker Image CI - Expense Sevice
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "main" ]
     paths:
       - "expense_service/**"
       - ".github/workflows/docker-image-expensesvc.yml"

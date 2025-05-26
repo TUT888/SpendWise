@@ -6,6 +6,8 @@ It provides tools for tracking spending over time.
 
 The system is built with a MongoDB database, modular microservices containerized via Docker, and deployed on Google Cloud using CI/CD pipelines.
 
+The project is configured CI/CD with GitHub Actions, any update on main branch will automatically trigger the test, build new image and push to Docker Hub (GKE deployment is disabled due to limited permission of GCP account).
+
 # Table of Contents
 - [About the project](#about-the-project)
 - [Containerization](#containerization)
@@ -28,6 +30,49 @@ The cloud-native application consists of three services: frontend, account, and 
 The frontend service acts as the main entry point, exposed via an external IP address and accessed by users.
 It communicates with the account and expense services to process user requests.
 
+## How to run
+Start all services:
+- Account service
+    ```
+    cd account_service
+    npm install
+    npm start
+    ```
+- Expense service
+    ```
+    cd expense_service
+    npm install
+    npm start
+    ```
+- Frontend service
+    ```
+    cd frontend
+    npm install
+    npm start
+    ```
+- Access the application (frontend): `http://localhost:3081`
+
+## How to test
+> **The project configured CI/CD with GitHub Actions, any update on main branch will automatically trigger the test and build new images.**
+> - Account service & expense service: unit testing with Mocha/Chai
+> - Frontend service: end to end testing with Cypress
+
+For manually run the test, type below commmands
+- Test account service:
+    ```
+    cd account_service
+    npm test
+    ```
+- Test expense service:
+    ```
+    cd expense_service
+    npm test
+    ```
+- Test frontend service:
+    ```
+    cd frontend
+    npm run test:e2e
+    ```
 
 # Containerization
 Each service is developed separately in its own directory, with a corresponding Dockerfile.
