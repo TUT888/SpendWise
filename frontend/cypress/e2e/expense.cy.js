@@ -1,7 +1,17 @@
 describe("SpendWise E2E account management test", () => {
+  // Setup
+  if (process.env.GITHUB_ACTION) {
+    process.env.ACCOUNT_SERVICE_URL = process.env.ACCOUNT_SERVICE_URL || `http://localhost:${process.env.PORT || 3081}`;
+    process.env.EXPENSE_SERVICE_URL = process.env.EXPENSE_SERVICE_URL || `http://localhost:${process.env.PORT || 3081}`;
+  } else {
+    process.env.ACCOUNT_SERVICE_URL = process.env.ACCOUNT_SERVICE_URL || `http://localhost:3030`;
+    process.env.EXPENSE_SERVICE_URL = process.env.EXPENSE_SERVICE_URL || `http://localhost:3032`;
+  }
+
   const frontend_url = `http://localhost:${process.env.PORT || 3081}/`;
-  const account_url = process.env.ACCOUNT_SERVICE_URL || `http://localhost:3030`;
-    
+  const account_url = process.env.ACCOUNT_SERVICE_URL;
+  
+  // Prepare test data
   const testUserName = "Sample Test User";
   const testUserEmail = "sampletestuser@gmail.com";
   const testUserPass = "sampletestuser";
@@ -25,12 +35,14 @@ describe("SpendWise E2E account management test", () => {
     })
     
     it("Should add expense successfully", () => {
+      // Login
       cy.visit(frontend_url);
       cy.get('a[href="/login"]').should("exist").click();
       cy.get('input[id="input_email"]').should("exist").type(testUserEmail, { force: true });
       cy.get('input[id="input_password"]').should("exist").type(testUserPass, { force: true });
       cy.get('button[id="login_btn"]').click();
 
+      // Add expense
       cy.get('a[href="/expense"]').should("exist").click();
       cy.get('button[id="open-add-expense-form"]').should("exist").click();
 
@@ -39,20 +51,24 @@ describe("SpendWise E2E account management test", () => {
       cy.get('input[id="input_amount"]').should("exist").type(testAmount, { force: true });
       cy.get('button[id="add_expense_btn"]').click();
 
+      // Check result
       cy.contains(testCategory);
       cy.contains(testDesciption)
       cy.contains(testAmount)
     })
 
     it("Should get expense successfully", () => {
+      // Login
       cy.visit(frontend_url);
       cy.get('a[href="/login"]').should("exist").click();
       cy.get('input[id="input_email"]').should("exist").type(testUserEmail, { force: true });
       cy.get('input[id="input_password"]').should("exist").type(testUserPass, { force: true });
       cy.get('button[id="login_btn"]').click();
 
+      // Check existing expense
       cy.get('a[href="/expense"]').should("exist").click();
 
+      // Check result
       cy.contains(testCategory);
       cy.contains(testDesciption)
       cy.contains(testAmount)
@@ -78,6 +94,7 @@ describe("SpendWise E2E account management test", () => {
       cy.get('input[id="input_amount"]').should("exist").type(testAmount, { force: true });
       cy.get('button[id="edit_expense_btn"]').click();
 
+      // Check result
       cy.contains(testAmount);
     })
 
@@ -97,6 +114,8 @@ describe("SpendWise E2E account management test", () => {
 
       // Delete expense
       cy.get('button[class="btn btn-sm btn-danger delete-expense-btn"]').should("exist").click();
+      
+      // Check result
       cy.contains('.selector', testCategory).should('not.exist');
       cy.contains('.selector', testDesciption).should('not.exist');
       cy.contains('.selector', testAmount).should('not.exist');

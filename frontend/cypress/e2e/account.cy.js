@@ -1,7 +1,17 @@
 describe("SpendWise E2E account management test", () => {
+  // Setup
+  if (process.env.GITHUB_ACTION) {
+    process.env.ACCOUNT_SERVICE_URL = process.env.ACCOUNT_SERVICE_URL || `http://localhost:${process.env.PORT || 3081}`;
+    process.env.EXPENSE_SERVICE_URL = process.env.EXPENSE_SERVICE_URL || `http://localhost:${process.env.PORT || 3081}`;
+  } else {
+    process.env.ACCOUNT_SERVICE_URL = process.env.ACCOUNT_SERVICE_URL || `http://localhost:3030`;
+    process.env.EXPENSE_SERVICE_URL = process.env.EXPENSE_SERVICE_URL || `http://localhost:3032`;
+  }
+
   const frontend_url = `http://localhost:${process.env.PORT || 3081}/`;
-  const account_url = process.env.ACCOUNT_SERVICE_URL || "http://localhost:3030";
+  const account_url = process.env.ACCOUNT_SERVICE_URL;
     
+  // Prepare test data
   const testUserName = "Sample Test User";
   const testUserEmail = "sampletestuser@gmail.com";
   const testUserPass = "sampletestuser";
