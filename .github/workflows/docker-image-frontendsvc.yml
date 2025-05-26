@@ -37,7 +37,7 @@ jobs:
         run: | 
           cd frontend
           npm install
-          npm test
+          npm run test:e2e
       
       # Containerization
       - name: Log in to Docker Hub
