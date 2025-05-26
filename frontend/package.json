@@ -8,7 +8,7 @@
     "start:test": "cross-env NODE_ENV=test node app.js",
     "cypress:open": "npx cypress open",
     "test:e2eopen": "start-server-and-test start:alltest http://localhost:3081 cypress:open",
-    "start:alltest": "concurrently \"cd ../account_service && cross-env PORT=3030 npm run start:test\" \"cd ../expense_service && cross-env PORT=3032 npm run start:test\" \"cd ../frontend && npm run start:test\"",
+    "start:alltest": "concurrently \"cd ../account_service && cross-env PORT=3030 npm run start:test\" \"cd ../expense_service && cross-env PORT=3032 npm run start:test\" \"cd ../frontend && cross-env PORT=3081 npm run start:test\"",
     "cypress:run": "cypress run --browser chrome",
     "test:e2e": "start-server-and-test start:alltest http://localhost:3081 cypress:run"
   },
