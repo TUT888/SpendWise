@@ -35,8 +35,8 @@ jobs:
           
       - name: Build and push Docker image
         run: |
-          docker build -t tut888/sit737-account-service:${{ github.sha }} ./account_service
-          docker push tut888/sit737-account-service:${{ github.sha }}
+          docker build -t tut888/sit737-account-service:autobuild ./account_service
+          docker push tut888/sit737-account-service:autobuild
       
       # Below code is not working due to limited permission
       # - uses: google-github-actions/auth@v2
