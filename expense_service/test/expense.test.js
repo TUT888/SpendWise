@@ -1,5 +1,4 @@
 // require("dotenv").config();
-const User = require("../models/user");
 
 const chaiHttp = require("chai-http");
 const chai = require("chai");
@@ -8,33 +7,28 @@ const { expect } = chai;
 // Setup 
 chai.use(chaiHttp);
 
-process.env.ACCOUNT_SERVICE_URL = `http://localhost:${process.env.PORT}`
+PORT = process.env.PORT || 3032;
+process.env.NODE_ENV = process.env.NODE_ENV || "test";
+process.env.ACCOUNT_SERVICE_URL = `http://localhost:${PORT}`
+
 const accountServer = require("../../account_service/server");
 const expenseServer = require("../server");
-
-const accountLogger = require("../../account_service/logger").logger;
-const expenseLogger = require("../logger").logger;
 
 const testUserName = "Sample Test User";
 const testUserEmail = "sampletestuser@gmail.com";
 const testUserPass = "sampletestuser";
 
 before(async () => {
-  accountLogger.silent = true;
-  expenseLogger.silent = true;
   await chai.request(accountServer)
             .post("/api/account/register")
             .send({ name: testUserName, email: testUserEmail, password: testUserPass })
 })
 
 after(async () => {
-  accountLogger.silent = false;
-  expenseLogger.silent = false;
   await chai.request(accountServer)
-            .post("/api/account/logout")
+            .delete("/api/account")
             .set('Cookie', cookie)
-            .end((err, res) => { cookie = res.header["set-cookie"]; });
-  await User.deleteOne({ email: testUserEmail })
+            .send({ email: testUserEmail, password: testUserPass })
 });
 
 // Testing
