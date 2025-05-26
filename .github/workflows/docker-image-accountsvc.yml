@@ -24,6 +24,7 @@ jobs:
           MONGO_URI: mongodb://localhost:27017/spendwise
         run: | 
           cd account_service
+          npm install
           npm run start:test
 
       - name: Run test for account service
