@@ -1,5 +1,5 @@
 
-# SIT737 - 2025 - Task 10.2HD
+# SpendWise: SIT737-2025-Task 11.1HD
 
 SpendWise is a cloud-native application project that enables users to manage and monitor personal expenses.
 It provides tools for tracking spending over time.
@@ -10,6 +10,9 @@ The project is configured CI/CD with GitHub Actions, any update on main branch w
 
 # Table of Contents
 - [About the project](#about-the-project)
+    - [How to run](#how-to-run)
+    - [How to test](#how-to-test)
+    - [CI-CD instruction](#ci-cd-instruction)
 - [Containerization](#containerization)
 - [Google Cloud Platform Deployment](#google-cloud-platform-deployment)
     - [GCP Kubernetes Cluster setup](#gcp-kubernetes-cluster-setup)
@@ -72,6 +75,22 @@ For manually run the test, type below commmands
     ```
     cd frontend
     npm run test:e2e
+    ```
+
+## CI-CD instruction
+CI/CD workflow is created using GitHub Actions. However, due to limited permission, **CI/CD workflow stop at publishing image to Docker Hub**.
+- Current workflow is: commit & push -> trigger auto testing -> auto build image -> auto publish to Docker Hub
+- The later step after publishing image is apply changes to GKE. The example of workflow configuration is commented at `.github/workflows/docker-image-accountsvc.yml`
+
+As a workaround, below is an alternative solution for GKE deployment:
+- Use the tag `autobuild` for automated-built image by GitHub Actions, avoid using original tag in deployment `.yaml` file in case the new image has error
+- Manually apply the changes to GKE using `set image` and `rollout restart` commands. Below code is example for account service deployment
+    ```bash
+    # For first time using `autobuild` tag -> we need to set new image tag for deployed image
+    kubectl set image deployment/accountsvc-deployment accountsvc-container=tut888/sit737-account-service:autobuild
+    
+    # For later updates -> we only need to restart the deployment to re-pull new image
+    kubectl rollout restart deployment/accountsvc-deployment
     ```
 
 # Containerization
