@@ -5,7 +5,9 @@ const { logError, logInfo } = require("../logger")
 const getAllExpense = async (req, res) => {
   try {
     // Get data
-    const { user_email } = req.query;
+    // const { user_email } = req.query;
+    const user_email = req.locals.user.email;
+
     if (!user_email) {
       logError(req.method, req.url, "get expense failed, provided information is invalid");
       return res.status(400).json({

@@ -2,13 +2,8 @@ const express = require('express');
 const router = express.Router();
 const accountController = require('../controllers/accountController');
 
-// Auth status check
-router.get('/status', accountController.checkLogin);
-
-router.post('/register', accountController.register);
-router.post('/login', accountController.login);
-router.post('/logout', accountController.logout);
-
+// Account base route: /api/account (defined in index.js)
+router.post('/', accountController.createAccount);
 router.delete('/', accountController.deleteAccount);
 
 module.exports = router;

@@ -1,5 +1,8 @@
 require("dotenv").config();
 
+MONGO_URI = process.env.MONGO_URI
+SESSION_SECRET = process.env.SESSION_SECRET
+
 // Setup server
 const express = require("express");
 
@@ -13,11 +16,11 @@ app.use(express.urlencoded({ extended: false }));
 const session = require("express-session");
 const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoStore = new MongoDBStore({
-  uri: process.env.MONGO_URI,
+  uri: MONGO_URI,
   collection: "user_sessions"
 });
 app.use(session({
-    secret: process.env.SESSION_SECRET || "MySecret",
+    secret: SESSION_SECRET || "MySecret",
     resave: false,
     saveUninitialized: false,
     store: mongoStore,
@@ -29,6 +32,7 @@ app.use(session({
 
 require("./database/connectDB");
 app.use("/api/account", require('./routes/accountRouter'))
+app.use("/api/auth", require('./routes/authRouter'))
 
 // Start server
 app.listen(port, () => {

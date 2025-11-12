@@ -1,5 +1,5 @@
 function requireAuth(req, res, next) {
-  if (res.locals.loggedIn) return next();
+  if (req.locals && req.locals.loggedIn) return next();
   return res.redirect('/login');
 }
 

@@ -30,6 +30,8 @@ spec:
               key: mongo-password  # App gets MongoDB password from Secret
         - name: MONGO_URI
           value: "mongodb://$(MONGO_USER):$(MONGO_PASSWORD)@my-mongo-svc:27017/spendwise?authSource=admin"
+        - name: JWT_SECRET_KEY
+          value: "MySecret" # For demo only. It should be hidden, not being exposed like this
 ---
 apiVersion: v1 
 kind: Service 

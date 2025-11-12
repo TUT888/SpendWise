@@ -1,24 +1,34 @@
-const CHECK_AUTHENTICATION_STATUS_URL = `${process.env.ACCOUNT_SERVICE_URL}/api/account/status`;
+const CHECK_AUTHENTICATION_STATUS_URL = `${process.env.ACCOUNT_SERVICE_URL}/api/auth/status`;
 
 async function checkLogin(req, res, next) {
-  const cookies = req.headers.cookie;
   try {
+    const token = req.cookies['jwt_token']
+    if (!token) {
+      throw new Error('No token found')
+    }
+
     // Communicate with account service to verify credentials
     const response = await fetch(CHECK_AUTHENTICATION_STATUS_URL, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': cookies
+        'Authorization': `Bearer ${token}`
       },
     });
     const data = await response.json();
 
     // Store user data per request
-    res.locals.loggedIn = data.loggedIn;
-    res.locals.user = data.user || null;
+    req.locals = {
+      loggedIn: data.loggedIn,
+      user: data.user || null,
+      token: token
+    }
   } catch {
-    res.locals.loggedIn = false;
-    res.locals.user = null;
+    req.locals = {
+      loggedIn: false,
+      user: null,
+      token: null
+    }
   }
   next();
 }

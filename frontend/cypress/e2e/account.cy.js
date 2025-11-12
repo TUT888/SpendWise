@@ -9,7 +9,7 @@ describe("SpendWise E2E account management test", () => {
     
   // Prepare test data
   const testUserName = "Sample Test User";
-  const testUserEmail = "sampletestuser@gmail.com";
+  const testUserEmail = "sampletestuser222@gmail.com";
   const testUserPass = "sampletestuser";
 
   describe("User authentication test", () => {

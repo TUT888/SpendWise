@@ -10,3 +10,36 @@
 {"level":"info","message":"[EXPENSE] GET at /?user_email=alice@gmail.com: get expense successful for alice@gmail.com","service":"expense"}
 {"level":"info","message":"[EXPENSE] DELETE at /: delete expense 68299f452a540961faee9736 successful","service":"expense"}
 {"level":"info","message":"[ACCOUNT] POST at /login: session created, login successful","service":"account"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for otheruser@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] POST at /: add expense successful for otheruser@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for otheruser@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] DELETE at /: delete expense 681989a94bc9c4c93a6ba5a8 successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] DELETE at /: delete expense 681989b24bc9c4c93a6ba5ad successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] DELETE at /: delete expense 681993c7a16dfccd416991d2 successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] DELETE at /: delete expense 681997c3f52227dd7f0d3b4d successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] DELETE at /: delete expense 691405980fb058a9d9fe0fbb successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] POST at /: add expense successful for otheruser@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for otheruser@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] PUT at /: update expense 691405a20fb058a9d9fe0fca successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for otheruser@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for otheruser@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for otheruser@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for newww@gmail.com, there isn't any registered expense","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for newww@gmail.com, there isn't any registered expense","service":"expense"}
+{"level":"info","message":"[EXPENSE] POST at /: add expense successful for newww@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for newww@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] PUT at /: update expense 691406970fb058a9d9fe0fdb successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for newww@gmail.com","service":"expense"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed with Internal Server Error: Error: secretOrPrivateKey must have a value","service":"account"}
+{"level":"info","message":"[ACCOUNT] DELETE at /: delete account for user sampletestuser22222@gmail.com successful","service":"account"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com, there isn't any registered expense","service":"expense"}
+{"level":"info","message":"[EXPENSE] POST at /: add expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] PUT at /: update expense 691411d34df32b9895d7e9a2 successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] DELETE at /: delete expense 691411d34df32b9895d7e9a2 successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com, there isn't any registered expense","service":"expense"}

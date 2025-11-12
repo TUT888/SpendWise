@@ -54,3 +54,232 @@
 {"level":"info","message":"[ACCOUNT] GET at /status: request received, session available:  alice@gmail.com","service":"account"}
 {"level":"info","message":"[ACCOUNT] POST at /logout: session destroyed, logout successful","service":"account"}
 {"level":"info","message":"[ACCOUNT] GET at /status: request received, session unavailable","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed, user email is invalid","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /register: registration failed with Internal Server Error: MongoServerError: E11000 duplicate key error collection: spendwise.users index: email_1 dup key: { email: \"otheruser@gmail.com\" }","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /register: registration failed, user email already existed","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed, user password is not match","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed, user password is not match","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /logout: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /logout: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /logout: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token not found","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /: registration failed, user email already existed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /: registration failed, user email already existed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /: registration failed, user email already existed","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] DELETE at /: delete account for user sampletestuser222@gmail.com successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] DELETE at /: delete account for user sampletestuser222@gmail.com successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] DELETE at /: delete account for user sampletestuser222@gmail.com successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] DELETE at /: delete account for user sampletestuser222@gmail.com successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: TokenExpiredError: jwt expired","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] DELETE at /: delete account for user sampletestuser222@gmail.com successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] DELETE at /: delete account for user sampletestuser222@gmail.com successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /: registration successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /login: JWT created, login successful","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] GET at /status: request received, token found for user [object Object]","service":"account"}
+{"level":"info","message":"[ACCOUNT] POST at /logout: blacklisted token, logout successful","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: request received, token was blacklisted","service":"account"}
+{"level":"info","message":"[ACCOUNT] DELETE at /: delete account for user sampletestuser222@gmail.com successful","service":"account"}

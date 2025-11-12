@@ -40,16 +40,3 @@ jobs:
           docker build -t tut888/sit737-account-service:autobuild ./account_service
           docker push tut888/sit737-account-service:autobuild
       
-      # Below code is not working due to limited permission
-      # - uses: google-github-actions/auth@v2
-      #   with:
-      #     credentials_json: {{ secrets.GKE_SA_KEY }}
-
-      # - name: Set up Cloud SDK
-      #   uses: google-github-actions/setup-gcloud@v2
-      
-      # - name: Deploy updated image to GKE
-      #   run: |
-      #     gcloud container clusters get-credentials simple-k8s-cluster --location=australia-southeast1-b
-      #     kubectl set image deployment/accountsvc-deployment accountsvc-container=tut888/sit737-account-service:{{ github.sha }}
-      #     kubectl rollout status deployment/accountsvc-deployment
