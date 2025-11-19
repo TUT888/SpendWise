@@ -4,9 +4,13 @@
 SpendWise is a cloud-native application project that enables users to manage and monitor personal expenses.
 It provides tools for tracking spending over time.
 
-The system is built with a MongoDB database, modular microservices containerized via Docker, and deployed on Google Cloud using CI/CD pipelines.
+The system is built with a MongoDB database, modular microservices containerized via Docker, and deployed to Google Cloud.
 
-The project is configured CI/CD with GitHub Actions, any update on main branch will automatically trigger the test, build new image and push to Docker Hub (GKE deployment is disabled due to limited permission of GCP account).
+The project is configured **CI with GitHub Actions**, any update on main branch will automatically trigger the test, build new image and push to **Docker Hub**
+> GKE deployment will be done manually due to limited permission of provided GCP account restricting automated deployment.
+
+![Account](images/account.png)
+![Expense](images/expense.png)
 
 # Table of Contents
 - [About the project](#about-the-project)
@@ -26,14 +30,21 @@ The project is configured CI/CD with GitHub Actions, any update on main branch w
     - [Useful commands](#useful-commands)
     - [Some encountered issues](#useful-commands)
 
-Detailed step-by-step instructions provided below.
-
 # About the project
-The cloud-native application consists of three services: frontend, account, and expense.
-The frontend service acts as the main entry point, exposed via an external IP address and accessed by users.
-It communicates with the account and expense services to process user requests.
+The cloud‑native application consists of three services: frontend, account, and expense.
+- The **frontend** acts as the **main entry point**, exposed via an **external IP address** and accessed by users. It communicates with the account and expense services to process user requests.
+- The **account and expense services** communicate with the frontend and with each other through **cluster IPs**, restricting external access.
+- The application uses a **centralized authentication system with JWT**, requiring all protected resources to verify user credentials through the dedicated account service before granting access. This ensures secure and **consistent authorization across all microservices**.
 
 ## How to run
+### Run all with docker compose
+Start all services with:
+```
+docker compose up
+``` 
+Access the application (frontend): `http://localhost:3380`
+
+### Run individually
 Start all services:
 - Account service
     ```
