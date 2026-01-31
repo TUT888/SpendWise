@@ -84,3 +84,15 @@ Check the container's status
 ```bash
 docker ps
 ```
+
+## Troubleshooting
+
+If you have problem with **push** or **pull** images, ensure you already logged in and have image pulling permission:
+```bash
+docker login
+```
+
+Then you can revoke the login session with:
+```bash
+docker logout
+```

@@ -2,7 +2,7 @@
 
 This is a **generic how-to documentation** for using Kubernetes with Docker Desktop.
 
-## Prerequisite
+# Prerequisite
 - **Docker Desktop** must be installed: [Docker - Prerequisite](./DOCKER.md#prerequisite)
 - **Kubernetes** must be enabled:
     1. Activate Hyper-V
@@ -12,6 +12,7 @@ This is a **generic how-to documentation** for using Kubernetes with Docker Desk
 
         > **Start Docker Desktop > Setting > Kubernetes > Enable Kubernetes > Apply and Restart**
 
+# Usage
 ## Kubernetes Cluster setup
 1. Activate Hyper-V:
     
@@ -20,6 +21,25 @@ This is a **generic how-to documentation** for using Kubernetes with Docker Desk
 2. Install and enable Kubernetes:
 
     **Start Docker** > **Setting** > **Kubernetes** > **Enable Kubernetes** > **Apply and Restart**
+
+## Kubernetes Context (Docker Desktop vs Cloud Provider)
+While working with `kubectl` commands in our local machine and manual cloud deployment (e.g. **Google Cloud SDK**), it is essential to use the right context.
+- To get all context, run:
+    ```bash
+    kubectl config get-contexts
+    ```
+- To check current working context, run:
+    ```bash
+    kubectl config current-context
+    ```
+- To use context, run:
+    ```bash
+    # Use docker desktop
+    kubectl config use-context docker-desktop
+
+    # Use google cloud
+    kubectl config use-context gke_project-id_cluster-name_region 
+    ```
 
 ## Kubernetes Dashboard (Optional)
 1. Deploy the Dashboard UI:
@@ -49,6 +69,7 @@ This is a **generic how-to documentation** for using Kubernetes with Docker Desk
         ```
 
 ## Kubernetes Deployment
+### Deployment
 1. Create `.yaml` configuration files, some common files are
     - Credential & Configuration: secrets, config maps, etc
     - Database: persistent volume claims, database image deployment, etc
@@ -58,14 +79,18 @@ This is a **generic how-to documentation** for using Kubernetes with Docker Desk
     kubectl apply -f <filename>.yaml
     ```
 
-## Monitoring and Interaction
-### Pod and service checking
-To verify the running pods and services:
+### Direct Changes 
+#### Update image tag
+We can manually apply the changes to k8s using `set image` and `rollout restart` commands. Below code is example for account service deployment
 ```bash
-kubectl get pods
-kubectl get services
+# For first time using `newtag` tag -> we need to set new image tag for deployed image
+kubectl set image deployment/accountsvc-deployment accountsvc-container=tut888/sit737-account-service:newtag
+
+# For later updates -> we only need to restart the deployment to re-pull new image
+kubectl rollout restart deployment/accountsvc-deployment
 ```
 
+## Monitoring and Interaction
 ### Port-forwarding
 - To forward the traffic, creating a temporary tunnel from your laptop to the cluster:
     > The `<service-name>` and `<service-port>` must match with your service configuration
@@ -76,3 +101,44 @@ kubectl get services
     ```bash
     http://localhost:<host-port>
     ```
+
+### Monitor component status
+Check the status of deployed components (e.g., Running, Pending, ImagePullBackOff, etc.)
+```bash
+# Get the running pods
+kubectl get pods
+
+# Get the running service
+kubectl get service
+
+# Get the storage class
+kubectl get storageclass
+
+# Get the persistent volume claim
+kubectl get pvc
+```
+
+### Inspect pod
+Describe a specific pod to review events and investigate issues such as image pulling errors, resource limits, or readiness probe failures
+```bash
+kubectl describe pod <pod-name>
+```
+
+View the logs of a specific pod to identify error messages or runtime issues:
+```bash
+kubectl logs <pod-name>
+```
+
+### Check inter-service communication
+Execute a command inside a running pod (e.g., the frontend service) to test connectivity with another service (e.g., the account service)
+```bash
+# Replace <pod-name> with the actual pod name of the service you want to use for the test (e.g., a frontend pod)
+kubectl exec -it <pod-name> -- curl http://accountsvc-service:3330/status
+```
+
+## Clean Up
+```bash
+kubectl delete <type> <name>
+
+# Ex: kubectl delete deployment account-svc-deployment
+```
