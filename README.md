@@ -1,4 +1,4 @@
-# SpendWise: SIT737-2025-Task 11.1HD
+# SpendWise - Microservice with CI/CD on GCP
 
 SpendWise is a cloud-native application project that enables users to manage and monitor personal expenses.
 It provides tools for tracking spending over time.

@@ -2,9 +2,10 @@
 
 This is a **generic how-to documentation** for using Docker Dekstop and Docker Hub.
 
-## Prerequisite
+# Prerequisite
 **Docker Desktop** must be installed. Please find [official documentation](https://docs.docker.com/desktop/setup/install/windows-install/) for detail installation instruction.
 
+# Usage
 ## Dockerfile & Docker Image (Containerization)
 1. Create a `Dockerfile` in the project folder (root)
     ```bash
