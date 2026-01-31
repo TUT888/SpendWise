@@ -12,83 +12,64 @@ The project is configured **CI with GitHub Actions**, any update on main branch 
 ![Account](images/account.png)
 ![Expense](images/expense.png)
 
-# Table of Contents
-- [About the project](#about-the-project)
-    - [How to run](#how-to-run)
-    - [How to test](#how-to-test)
-    - [CI-CD instruction](#ci-cd-instruction)
-- [Containerization](#containerization)
-- [Google Cloud Platform Deployment](#google-cloud-platform-deployment)
-    - [GCP Kubernetes Cluster setup](#gcp-kubernetes-cluster-setup)
-    - [Apply Deployment and Service](#apply-deployment-and-service)
-    - [Check the running pods and services](#check-the-running-pods-and-services)
-- [Monitoring the application](#monitoring-the-application)
-    - [Monitoring in the Cloud Console Web UI (requires permission)](#monitoring-in-the-cloud-console-web-ui)
-    - [Monitoring with commands](#monitoring-with-commands)
-- [Project clean up](#project-clean-up-optional)
-- [Troubleshooting](#troubleshooting)
-    - [Useful commands](#useful-commands)
-    - [Some encountered issues](#useful-commands)
-
 # About the project
 The cloud‑native application consists of three services: frontend, account, and expense.
 - The **frontend** acts as the **main entry point**, exposed via an **external IP address** and accessed by users. It communicates with the account and expense services to process user requests.
 - The **account and expense services** communicate with the frontend and with each other through **cluster IPs**, restricting external access.
 - The application uses a **centralized authentication system with JWT**, requiring all protected resources to verify user credentials through the dedicated account service before granting access. This ensures secure and **consistent authorization across all microservices**.
 
-## How to run
+## Start application
 ### Run all with docker compose
-Start all services with:
-```
-docker compose up
-``` 
-Access the application (frontend): `http://localhost:3380`
+- Start all services:
+    ```bash
+    docker compose up
+    ``` 
+- Access the application (frontend): `http://localhost:3380`
 
 ### Run individually
-Start all services:
-- Account service
-    ```
-    cd account_service
-    npm install
-    npm start
-    ```
-- Expense service
-    ```
-    cd expense_service
-    npm install
-    npm start
-    ```
-- Frontend service
-    ```
-    cd frontend
+- Start service one by one (Account, Expense and Frontend):
+    ```bash
+    cd <service_directory>
     npm install
     npm start
     ```
 - Access the application (frontend): `http://localhost:3081`
 
-## How to test
+## Testing
 > **The project configured CI/CD with GitHub Actions, any update on main branch will automatically trigger the test and build new images.**
 > - Account service & expense service: unit testing with Mocha/Chai
 > - Frontend service: end to end testing with Cypress
 
 For manually run the test, type below commmands
-- Test account service:
+- Test backend services:
     ```
-    cd account_service
+    cd <service_directory>
     npm test
     ```
-- Test expense service:
-    ```
-    cd expense_service
-    npm test
-    ```
-- Test frontend service:
+- Test frontend:
     ```
     cd frontend
     npm run test:e2e
     ```
 
-## CI-CD instruction
+## Containerization
+> For detail instruction, please refer to my [Docker Documentation](./docs/DOCKER.md)
+
+Each service is developed separately in its own directory, with a corresponding Dockerfile.
+
+Run the following commands to containerize all images at once
+```bash
+docker compose build
+```
+
+Tag the images and push them to Docker Hub:
+```bash
+docker tag sit737-account-service <docker-username>/sit737-account-service
+
+docker push <docker-username>/sit737-account-service
+```
+
+## CI-CD Pipeline
 CI/CD workflow is created using GitHub Actions. However, due to limited permission, **CI/CD workflow stop at publishing image to Docker Hub**.
 - Current workflow is: commit & push -> trigger auto testing -> auto build image -> auto publish to Docker Hub
 - The later step after publishing image is apply changes to GKE. The example of workflow configuration is commented at `.github/workflows/docker-image-accountsvc.yml`
@@ -103,28 +84,6 @@ As a workaround, below is an alternative solution for GKE deployment:
     # For later updates -> we only need to restart the deployment to re-pull new image
     kubectl rollout restart deployment/accountsvc-deployment
     ```
-
-# Containerization
-Each service is developed separately in its own directory, with a corresponding Dockerfile.
-
-Run the following commands to containerize the application into Docker images
-```bash
-docker build -t sit737-account-service ./account_service
-docker build -t sit737-expense-service ./expense_service
-docker build -t sit737-frontend-service ./frontend
-```
-
-Tag the images and push them to Docker Hub:
-```bash
-docker tag sit737-account-service tut888/sit737-account-service
-docker push tut888/sit737-account-service
-
-docker tag sit737-frontend-service tut888/sit737-frontend-service
-docker push tut888/sit737-frontend-service
-
-docker tag sit737-expense-service tut888/sit737-expense-service
-docker push tut888/sit737-expense-service
-```
 
 # Google Cloud Platform Deployment
 ## GCP Kubernetes Cluster setup
