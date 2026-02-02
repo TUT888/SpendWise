@@ -1,0 +1,48 @@
+name: Test - Frontend Sevice
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "frontend/**"
+      - ".github/workflows//**-frontendsvc.yml"
+
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/**-frontendsvc.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      
+      - name: Start MongoDB container
+        run: docker run -d -p 27017:27017 --name test-mongo mongo:6
+      
+      # Test
+      - name: Install dependencies for account service
+        run: | 
+          cd backend/account_service
+          npm install
+          
+      - name: Install dependencies for expense service
+        run: | 
+          cd backend/expense_service
+          npm install
+
+      - name: Run test for frontend service
+        env:
+          PORT: 3081
+          NODE_ENV: test
+          MONGO_URI: mongodb://localhost:27017/spendwise
+          JWT_SECRET_KEY: MySecret
+          ACCOUNT_SERVICE_URL: http://localhost:3030
+          EXPENSE_SERVICE_URL: http://localhost:3032
+        run: | 
+          cd frontend
+          npm install
+          npm run test:e2e

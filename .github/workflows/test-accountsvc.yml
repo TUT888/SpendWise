@@ -1,0 +1,36 @@
+name: Test - Account Sevice
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "backend/account_service/**"
+      - ".github/workflows/**-accountsvc.yml"
+
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "backend/account_service/**"
+      - ".github/workflows/**-accountsvc.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      
+      - name: Start MongoDB container
+        run: docker run -d -p 27017:27017 --name test-mongo mongo:6
+      
+      # Test
+      - name: Run test for account service
+        env:
+          PORT: 3030
+          NODE_ENV: test
+          JWT_SECRET_KEY: MySecret
+          MONGO_URI: mongodb://localhost:27017/spendwise
+        run: | 
+          cd backend/account_service
+          npm install
+          npm test

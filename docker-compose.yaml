@@ -7,7 +7,7 @@ services:
       - "27018:27017"
 
   account-service:
-    build: ./account_service
+    build: ./backend/account_service
     container_name: account-service
     ports:
       - "3330:3030"
@@ -19,7 +19,7 @@ services:
       - mongo
 
   expense-service:
-    build: ./expense_service
+    build: ./backend/expense_service
     container_name: expense-service
     ports:
       - "3332:3032"

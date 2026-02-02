@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spendwise-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spendwise-mongo
+  template:
+    metadata:
+      labels:
+        app: spendwise-mongo
+    spec:
+      containers:
+        - image: mongo
+          name: mongo
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: spendwise-mongo-secret
+                  key: mongo-user
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: spendwise-mongo-secret
+                  key: mongo-password
+          volumeMounts:
+            - mountPath: /data/db
+              name: spendwise-mongo-volume
+          ports:
+            - containerPort: 27017
+      volumes:
+        - name: spendwise-mongo-volume
+          persistentVolumeClaim:
+            claimName: spendwise-mongo-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spendwise-mongo-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: spendwise-mongo
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expensesvc-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expensesvc
+  template:
+    metadata:
+      labels:
+        app: expensesvc
+    spec:
+      containers:
+      - name: expensesvc-container
+        image: spendwise-expense-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3032
+        env:
+        - name: ACCOUNT_SERVICE_URL
+          value: "http://accountsvc-service:3330"
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: spendwise-mongo-secret
+              key: mongo-user  # App gets MongoDB username from Secret
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: spendwise-mongo-secret
+              key: mongo-password  # App gets MongoDB password from Secret
+        - name: MONGO_URI
+          value: "mongodb://$(MONGO_USER):$(MONGO_PASSWORD)@spendwise-mongo-svc:27017/spendwise?authSource=admin"
+---
+apiVersion: v1 
+kind: Service 
+metadata: 
+  name: expensesvc-service
+spec: 
+  type: ClusterIP
+  selector:
+    app: expensesvc
+  ports: 
+    - port: 3332
+      targetPort: 3032

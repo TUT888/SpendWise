@@ -1,0 +1,19 @@
+{"level":"error","message":"[EXPENSE] PUT at /: update expense failed with Internal Server Error: ReferenceError: user_email is not defined","service":"expense"}
+{"level":"error","message":"[EXPENSE] PUT at /: update expense failed with Internal Server Error: ReferenceError: user_email is not defined","service":"expense"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] DELETE at /: delete account failed, user email is invalid","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed with Internal Server Error: Error: secretOrPrivateKey must have a value","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed with Internal Server Error: Error: secretOrPrivateKey must have a value","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] GET at /status: authentication failed with Internal Server Error: JsonWebTokenError: jwt malformed","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed with Internal Server Error: Error: secretOrPrivateKey must have a value","service":"account"}
+{"level":"error","message":"[ACCOUNT] POST at /login: login failed with Internal Server Error: Error: secretOrPrivateKey must have a value","service":"account"}
