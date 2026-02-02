@@ -1,11 +1,17 @@
-name: Docker Image CI - Expense Sevice
+name: Test - Expense Sevice
 
 on:
   push:
     branches: [ "main" ]
     paths:
       - "expense_service/**"
-      - ".github/workflows/docker-image-expensesvc.yml"
+      - ".github/workflows/**-expensesvc.yml"
+
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "expense_service/**"
+      - ".github/workflows/**-expensesvc.yml"
 
 jobs:
   build:

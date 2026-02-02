@@ -1,11 +1,17 @@
-name: Docker Image CI - Account Sevice
+name: Test - Account Sevice
 
 on:
   push:
     branches: [ "main" ]
     paths:
       - "account_service/**"
-      - ".github/workflows/docker-image-accountsvc.yml"
+      - ".github/workflows/**-accountsvc.yml"
+
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "account_service/**"
+      - ".github/workflows/**-accountsvc.yml"
 
 jobs:
   build:

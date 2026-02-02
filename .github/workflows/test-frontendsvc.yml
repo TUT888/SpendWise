@@ -1,11 +1,17 @@
-name: Docker Image CI - Frontend Sevice
+name: Test - Frontend Sevice
 
 on:
   push:
     branches: [ "main" ]
     paths:
       - "frontend/**"
-      - ".github/workflows/docker-image-frontendsvc.yml"
+      - ".github/workflows//**-frontendsvc.yml"
+
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/**-frontendsvc.yml"
 
 jobs:
   build:
