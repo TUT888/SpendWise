@@ -99,6 +99,37 @@ docker push <docker-username>/spendwise-frontend
 > - Docker Desktop must be installed, Kubernetes must be enabled. Alternatively, any other k8s engine such as Minikube can also be used for your preference.
 > - Detail instruction please refer to my documentation at [Kubernetes Documentation](./docs/KUBERNETES.md)
 
+### Google Cloud Setup
+
+
+
+```bash
+
+# Create service account with optional display name
+gcloud iam service-accounts create <your-service-account> --display-name <your-service-account-display-name>
+# Check your created accounts
+gcloud iam service-accounts list --project <your-project-id>
+# Assign roles for service account (we need it for permission to access the resources)
+# Some common roles are: container.admin, artifactregistry.reader, logging.logWriter monitoring.metricWriter
+
+gcloud projects add-iam-policy-binding <your-project-id> \
+    --member="serviceAccount:<your-service-account>@<your-project-id>.iam.gserviceaccount.com" \
+    --role="roles/<target-role>"
+
+# Create k8s cluster
+gcloud container clusters create <your-k8s-cluster> \
+    --enable-autoscaling --min-nodes 1 --max-nodes 4 \
+    --num-nodes=1 \
+    --zone=<your-target-zone> \
+    --service-account <your-service-account>@<your-project-id>.iam.gserviceaccount.com
+```
+
+gcloud container clusters create spendwise-k8s-cluster --num-nodes=1 --zone=australia-southeast1-b --enable-autoscaling --min-nodes 1 --max-nodes 4 --service-account spendwise-gke@spendwise-486202.iam.gserviceaccount.com --enable-ip-alias
+
+# Get credentials and switch to cloud context (kubectl)
+gcloud container clusters get-credentials spendwise-k8s-cluster --location=australia-southeast1-b
+
+
 ### Deployment
 > Detail instruction for **GCP deployment** please refer to my documentation at [GCP Documentation](./docs/GCP.md)
 
@@ -117,6 +148,7 @@ docker push <docker-username>/spendwise-frontend
         kubectl config use-context docker-desktop
 
         # Option 2: Use Google Cloud Platform (cloud deployment)
+        # YOU SHOULD HAVE SUCCESSFULLY LOGGED IN AND COMPLETED GOOGLE CLOUD SETUP 
         kubectl config use-context gke_project-id_cluster-name_region 
         ```
 - Navigate to your project directory where the deployment `.yaml` files are stored

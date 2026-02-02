@@ -6,39 +6,73 @@ This is a **generic how-to documentation** for using Google Cloud Platform (GCP)
     - [Artifact Registry](#artifact-registry)
     - [Google Kubernetes Engine (GKE)](#google-kubernetes-engine-gke)
 
+# Google Cloud Console
+1. Set up your account
+    - Use your browser to sign in to your Google Account, or create a new one if needed.
+    - Go to Google Cloud Console > Billing > Enable Billing Account and link it with your payment method.
+2. Create new project
+    - Go to <https://console.cloud.google.com/> and create new project.
+    - Save your project ID, as it will be required later during deployment.
+
 # Google Cloud CLI
+> The Google Cloud CLI (gcloud CLI) is the primary set of command-line tools for Google Cloud.
+> - It must be installed in your computer to run.
+> - Alternatively, you can use the Google Cloud SDK Shell (Cloud Shell) to run the commands in the cloud. It’s accessible in your browser through the Google Cloud Console when you’re logged in with your Google account.
+
 Step by step instruction for setting up Google Cloud CLI in your computer
 1. Download and install the Google Cloud CLI
 2. Configure the CLI using one of following option:
-    - Run `gcloud init` to config all at once
-      - Login to your google account by following the instruction
-      - Choose the target project you working with
-      - Configure the default region (optional)
-    - Run following command to config
-      - To login, use `gcloud auth login`
-      - To set working project, use `gcloud config set project <your-project>`
+    - Run following command to config all at once
+        ```bash
+        # Below command includes
+        # - Login to your google account by following the instruction
+        # - Choose the target project you working with
+        # - Configure the default region (optional)
+        gcloud init
+        ```
+    - Run following commands to config one by one
+        - To login
+            ```bash
+            gcloud auth login
+            ```
+        - To set working project:
+            ```bash
+            gcloud config set project <your-project-id>
+            ```
+        - To set compute zone
+            ```bash
+            gcloud config set compute/zone <your-compute-zone>
+            ```
 
 # Artifact Registry
+> Prerequisite:
+> - A Google Cloud Console account & project [#Google Cloud Console](#google-cloud-console)
+> - Google Cloud CLI installed and configured on your computer: [#Google Cloud CLI](#google-cloud-cli)
+
+Use the Google Cloud SDK Shell to remotely connect to the GCP platform and apply configuration files stored locally.
+
+Before proceeding with the instructions below, ensure that you:
+- Are logged into the correct account. If not, run `gcloud auth login`.
+- Have the correct project set. If not, run `gcloud config set project <your-project>`.
+
 ## Setup Google Cloud registry/repository
-1. Access the Google Cloud Platform and login with Google account
-2. Go to your project or create a new one
+1. Access the Google Cloud Platform and choose your project. If not yet created, follows [#Google Cloud Console](#google-cloud-console)
+2. Search and go to **Artifact Registry** and enable the API service. Alternatively, run below command in your console
+    ```bash
+    gcloud services enable artifactregistry.googleapis.com
+    ```
 3. Create a new repository in **Artifact Registry**, choosing Docker format with Standard mode
 
 ## Authenticate to a repository
-1. Google Cloud CLI Credential Helper
-    - List all hostnames in the helper
-      ```bash
-      gcloud auth configure-docker
-      ```
-    - Add target hostname (current region) to the Docker configuration file
-      ```bash
-      gcloud auth configure-docker <the-repo-region>-docker.pkg.dev
-      ```
-2. Enable the container registry service
+1. List all hostnames in the helper
     ```bash
-    gcloud services enable containerregistry.googleapis.com 
+    gcloud auth configure-docker
     ```
-
+2. Add target hostname (current region) to the Docker configuration file
+    ```bash
+    gcloud auth configure-docker <the-repo-region>-docker.pkg.dev
+    ```
+    
 ## Publish the image to the registry
 After creating the Google Cloud repository, we should be provided the path to the repo with this format: `LOCATION-docker.pkg.dev/PROJECT-ID/REPOSITORY`. We will use this format to tag and push the image to the cloud.
 1. Tag the image with the repo name
@@ -53,19 +87,18 @@ After creating the Google Cloud repository, we should be provided the path to th
 # Google Kubernetes Engine (GKE)
 ## Kubernetes Cluster setup
 > Prerequisite:
-> - A Google Cloud Console account & project
-> - Google Cloud SDK Shell installed and configured on your computer
+> - A Google Cloud Console account & project [#Google Cloud Console](#google-cloud-console)
+> - Google Cloud CLI installed and configured on your computer: [#Google Cloud CLI](#google-cloud-cli)
 
 Use the Google Cloud SDK Shell to remotely connect to the GCP platform and apply configuration files stored locally.
 
-### Login
-- Open the Google Cloud SDK Shell.
-- Log in and configure the project:
-    ```bash
-    gcloud auth login
-    gcloud config set project <your-project-id> # Ex: sit737-25t1-fname-lname-xxxxxx
-    gcloud config set compute/zone <your-compute-zone> # Ex: australia-southeast1-b
-    ```
+Before proceeding with the instructions below, ensure that you:
+- Are logged into the correct account. If not, run `gcloud auth login`.
+- Have the correct project set. If not, run `gcloud config set project <your-project>`.
+
+### Setup Google Kubernetes Engine
+1. Access the Google Cloud Platform and choose your project. If not yet created, follows [#Google Cloud Console](#google-cloud-console)
+2. Search and go to **Kubernetes Engine** and enable the API service. Alternatively, run below command in your console
 
 ### Create Kubernetes Cluster
 

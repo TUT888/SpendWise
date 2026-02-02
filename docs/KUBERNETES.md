@@ -55,13 +55,13 @@ While working with `kubectl` commands in our local machine and manual cloud depl
         ```
 
 3. Login to Dashboard
-    - Launch the dashboard (serving on localhost:8001 by default)
-        ```bash
-        kubectl proxy
-        ```
     - Create login token for created user
         ```bash
         kubectl -n kubernetes-dashboard create token admin-user
+        ```
+    - Launch the dashboard (serving on localhost:8001 by default)
+        ```bash
+        kubectl proxy
         ```
     - Use the generated token to login and access the dashboard using below URL:
         ```bash

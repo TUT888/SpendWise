@@ -1,0 +1,101 @@
+options:
+  logging: CLOUD_LOGGING_ONLY  # Send logs to Google Cloud Logging
+
+substitutions:
+  _IMAGE_NAME: "gcr.io/${PROJECT_ID}/gcpdevops-prod:${SHORT_SHA}"
+
+steps:
+  # Step 1: Build Docker image with SHA-based tagging
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${_IMAGE_NAME}', '.']
+
+  # Step 2: Push Docker image to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_IMAGE_NAME}']
+
+  # Step 3: Replace placeholder `__IMAGE__` in `gke.yaml` with actual image name 
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - "-c"
+      - |
+        sed -i "s|__IMAGE__|${_IMAGE_NAME}|g" gke.yaml
+
+  # Step 4: Deploy to Google Kubernetes Engine (GKE)
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - run
+      - --image=${_IMAGE_NAME}  # Correct image reference
+      - --location=us-central1-a  
+      - --cluster=gcp-devops-project  
+      - --namespace=development  
+      - --filename=gke.yaml
+
+# GCP cloud build for production
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _REGION: "australia-southeast1"
+  _REPO: "spendwise"
+  _CLUSTER: "spendwise-k8s-cluster"
+  _LOCATION: "australia-southeast1-b"
+  _NAMESPACE: "production"
+
+steps:
+  # --- BUILD AND PUSH IMAGES TO ARTIFACT REGISTRY --- #
+  # Account
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build', '-t',
+      '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/account:${SHORT_SHA}',
+      './backend/account_service'
+    ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/account:${SHORT_SHA}'
+    ]
+
+  # Expense
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build', '-t',
+      '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/expense:${SHORT_SHA}',
+      './backend/expense_service'
+    ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/expense:${SHORT_SHA}'
+    ]
+
+  # Frontend
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build', '-t',
+      '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/frontend:${SHORT_SHA}',
+      './frontend'
+    ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/frontend:${SHORT_SHA}'
+    ]
+
+  # --- DEPLOY TO GKE --- #
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    args:
+      - run
+      - --filename=k8s/cloud/
+      - --location=${_LOCATION}
+      - --cluster=${_CLUSTER}
+      - --namespace=${_NAMESPACE}  
+
+images:
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/account:${SHORT_SHA}'
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/expense:${SHORT_SHA}'
+  - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/frontend:${SHORT_SHA}'
