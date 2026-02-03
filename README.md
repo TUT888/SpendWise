@@ -19,8 +19,12 @@ The cloud‑native application consists of three services: frontend, account, an
 - The application uses a **centralized authentication system with JWT**, requiring all protected resources to verify user credentials through the dedicated account service before granting access. This ensures secure and **consistent authorization across all microservices**.
 
 # CI/CD Instruction
+
 ## Workflow Setup
 The SpendWise project is designed with a fully automated CI/CD pipeline that ensures every code change is tested, validated, built, and deployed in a consistent and reproducible way. The automation is powered by **GitHub Actions** and **Google Cloud Build**, forming a seamless workflow from commit to production.
+
+![Artifact Registry](images/artifact-registry.png)
+![Deployed Services](images/services-gcp-ui.png)
 
 ### 1. GitHub Actions — Continuous Integration (CI)
 > Workflows are defined in [`.github/workflows`](./.github/workflows/)
