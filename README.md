@@ -38,7 +38,7 @@ Only when all checks pass does the pipeline allow the change to progress toward 
 ### 2. Cloud Build Trigger — Continuous Delivery (CD)
 > Workflow is defined in [`cloudbuild.yaml`](./cloudbuild.yaml)
 > 
-> For detail instruction, please refer to my documentation at [GCP Documentation](./docs/GCP.md)
+> For detail instruction, please refer to my documentation at [GCP Documentation#Cloud Build](./docs/GCP.md#cloud-build)
 
 When changes are merged into `main`, GitHub automatically notifies **Google Cloud Build** through a build trigger configured in GCP.
 

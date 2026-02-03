@@ -68,6 +68,18 @@ While working with `kubectl` commands in our local machine and manual cloud depl
         http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
         ```
 
+## Kubernetes Namespace
+1. To create namespace:
+    ```bash
+    # Ex: kubectl create namespace production
+    kubectl create namespace <your-name-space>
+    ```
+2. Set namespace to current `kubectl` context, use `-n` or `--name-space`
+    ```bash
+    # Ex: kubectl config set-context --current --namespace=production
+    kubectl config set-context --current --namespace=<your-name-space>
+    ```
+
 ## Kubernetes Deployment
 ### Deployment
 1. Create `.yaml` configuration files, some common files are
@@ -80,7 +92,7 @@ While working with `kubectl` commands in our local machine and manual cloud depl
     ```
 
 ### Direct Changes 
-#### Update image tag
+#### Update and Restart Deployment
 We can manually apply the changes to k8s using `set image` and `rollout restart` commands. Below code is example for account service deployment
 ```bash
 # For first time using `newtag` tag -> we need to set new image tag for deployed image
