@@ -33,6 +33,7 @@ steps:
       - --location=${_LOCATION}
       - --cluster=${_CLUSTER}
       - --namespace=${_NAMESPACE}  
+      - --output=output/account
 
 
   # Expense
@@ -57,6 +58,7 @@ steps:
       - --location=${_LOCATION}
       - --cluster=${_CLUSTER}
       - --namespace=${_NAMESPACE}  
+      - --output=output/expense
 
   # Frontend
   - name: 'gcr.io/cloud-builders/docker'
@@ -80,6 +82,7 @@ steps:
       - --location=${_LOCATION}
       - --cluster=${_CLUSTER}
       - --namespace=${_NAMESPACE}  
+      - --output=output/frontend
 
 images:
   - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/account:${SHORT_SHA}'
