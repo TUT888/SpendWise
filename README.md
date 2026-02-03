@@ -18,37 +18,39 @@ The cloud‑native application consists of three services: frontend, account, an
 - The **account and expense services** communicate with the frontend and with each other through **cluster IPs**, restricting external access.
 - The application uses a **centralized authentication system with JWT**, requiring all protected resources to verify user credentials through the dedicated account service before granting access. This ensures secure and **consistent authorization across all microservices**.
 
-
 # CI/CD Instruction
+
 ## Workflow Setup
 The SpendWise project is designed with a fully automated CI/CD pipeline that ensures every code change is tested, validated, built, and deployed in a consistent and reproducible way. The automation is powered by **GitHub Actions** and **Google Cloud Build**, forming a seamless workflow from commit to production.
 
+![Artifact Registry](images/artifact-registry.png)
+![Deployed Services](images/services-gcp-ui.png)
+
 ### 1. GitHub Actions — Continuous Integration (CI)
+> Workflows are defined in [`.github/workflows`](./.github/workflows/)
+
 Every push or pull request to the `main` branch triggers the CI workflow. This stage focuses on code quality and reliability:
 - Install dependencies for each microservice
-- Run automated tests
-- Perform linting and static analysis
+- Run automated tests (later can expand to cover more tests, then perform linting and static analysis).
 - Validate that each service builds successfully
 Only when all checks pass does the pipeline allow the change to progress toward deployment. This ensures that broken code never reaches production.
 
 ### 2. Cloud Build Trigger — Continuous Delivery (CD)
+> Workflow is defined in [`cloudbuild.yaml`](./cloudbuild.yaml)
+> 
+> For detail instruction, please refer to my documentation at [GCP Documentation#Cloud Build](./docs/GCP.md#cloud-build)
+
 When changes are merged into `main`, GitHub automatically notifies **Google Cloud Build** through a build trigger configured in GCP.
 
 Cloud Build then executes a multi‑step pipeline:
-- Build Docker images for the frontend, account, and expense services
-- Tag each image using the commit SHA for traceability
+- Build and tag Docker images for all components, using the commit SHA for traceability.
 - Push the images to **Artifact Registry**
-- Apply updated Kubernetes manifests to the GKE cluster
+- Update the running workloads in GKE, ensuring that production deployments are safe, controlled, and fully automated:
+    - GKE performs a **rolling update**, replacing old pods with new ones
+    - Traffic is shifted gradually to avoid downtime
+    - If a deployment fails, GKE automatically rolls back to the previous stable version
 
 This creates a fully automated delivery pipeline where every deployment is versioned, reproducible, and auditable.
-
-### 3. Deployment to GKE — Automated Rollout
-Once Cloud Build pushes the new images, it updates the running workloads in GKE:
-- GKE performs a **rolling update**, replacing old pods with new ones
-- Traffic is shifted gradually to avoid downtime
-- If a deployment fails, GKE automatically rolls back to the previous stable version
-This ensures that production deployments are safe, controlled, and fully automated.
-
 
 ## Manual Deployment (Workaround)
 ### Purpose
@@ -57,7 +59,7 @@ In cases where your Google Cloud account does not have sufficient permissions to
 The manual deployment process still uses **GitHub Actions for CI**, but replaces the automated CD stage with a manual deployment to GKE.
 
 ### How It Works
-Generally, the workflow is: commit & push → automated testing → automatic image build → automatic publish to Docker Hub → manually apply the new image in GKE.
+Generally, the workflow is: commit & push -> automated testing -> automatic image build -> automatic publish to Docker Hub -> **manually** apply the new image in GKE.
 
 - In the GitHub Actions workflow, Docker images are built and pushed to Docker Hub after all tests pass. Each image is tagged with the `GITHUB_SHA` for uniqueness and easier maintenance.
 - After the image is published, update the running service in GKE using `kubectl set image` and then trigger a rollout restart. Example for the account service:

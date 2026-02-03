@@ -10,7 +10,7 @@ substitutions:
   _NAMESPACE: "production"
 
 steps:
-  # --- BUILD AND PUSH IMAGES TO ARTIFACT REGISTRY --- #
+  # --- BUILD IMAGES WITH SHA, PUSH IMAGES TO ARTIFACT REGISTRY, APPLY CHANGES TO GKE --- #
   # Account
   - name: 'gcr.io/cloud-builders/docker'
     args: [
@@ -24,6 +24,16 @@ steps:
       'push',
       '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/account:${SHORT_SHA}'
     ]
+    
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    args:
+      - run
+      - --filename=k8s/cloudbuild/accountsvc-deployment.yaml
+      - --image=gcr.io/${PROJECT_ID}/account:${SHORT_SHA}
+      - --location=${_LOCATION}
+      - --cluster=${_CLUSTER}
+      - --namespace=${_NAMESPACE}  
+
 
   # Expense
   - name: 'gcr.io/cloud-builders/docker'
@@ -39,6 +49,15 @@ steps:
       '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/expense:${SHORT_SHA}'
     ]
 
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    args:
+      - run
+      - --filename=k8s/cloudbuild/expensesvc-deployment.yaml
+      - --image=gcr.io/${PROJECT_ID}/expense:${SHORT_SHA}
+      - --location=${_LOCATION}
+      - --cluster=${_CLUSTER}
+      - --namespace=${_NAMESPACE}  
+
   # Frontend
   - name: 'gcr.io/cloud-builders/docker'
     args: [
@@ -52,12 +71,12 @@ steps:
       'push',
       '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/frontend:${SHORT_SHA}'
     ]
-
-  # --- DEPLOY TO GKE --- #
+    
   - name: 'gcr.io/cloud-builders/gke-deploy'
     args:
       - run
-      - --filename=k8s/cloudbuild/
+      - --filename=k8s/cloudbuild/frontendsvc-deployment.yaml
+      - --image=gcr.io/${PROJECT_ID}/frontend:${SHORT_SHA}
       - --location=${_LOCATION}
       - --cluster=${_CLUSTER}
       - --namespace=${_NAMESPACE}  

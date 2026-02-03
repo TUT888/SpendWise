@@ -74,18 +74,73 @@ Before proceeding with the instructions below, ensure that you:
     ```
     
 ## Publish the image to the registry
-After creating the Google Cloud repository, we should be provided the path to the repo with this format: `LOCATION-docker.pkg.dev/PROJECT-ID/REPOSITORY`. We will use this format to tag and push the image to the cloud.
+After creating the Google Cloud repository, we should be provided `<the-path-to-your-repository>` with this format: `LOCATION-docker.pkg.dev/PROJECT-ID/REPOSITORY`. We will use this format to tag and push the image to the cloud.
 1. Tag the image with the repo name
     ```bash
+    # Ex: docker tag account:latest australia-southeast1-docker.pkg.dev/myproject-12345/spendwise/account:latest
     docker tag <local-image-name> <the-path-to-your-repository>/<image-name>
     ```
 2. Push the image to the cloud
     ```bash
+    # Ex: docker push australia-southeast1-docker.pkg.dev/myproject-12345/spendwise/account:latest
     docker push <the-path-to-your-repository>/<image-name>
     ```
 
+# IAM & Admins - Service Account
+> In order to use GKE services, having a service account is required.
+> 
+> Alternatively, you can either use **Cloud Console UI** or `.yaml` configuration to create Service Account.
+
+With Service Account, you can assign roles and permissions to specific projects and use the cloud services.
+- Run below command to create a Service Account
+    ```bash
+    # Create
+    gcloud iam service-accounts create <your-service-account> --display-name <your-service-account-display-name>
+
+    # Check
+    gcloud iam service-accounts list --project <your-project-id>
+    ```
+- Assign role for the Service Account
+    ```bash
+    # Some common roles are: 
+    # container.admin, artifactregistry.reader, logging.logWriter monitoring.metricWriter, etc
+    gcloud projects add-iam-policy-binding <your-project-id> --member="serviceAccount:<your-service-account>@<your-project-id>.iam.gserviceaccount.com" --role="roles/<target-role>"
+    ```
+
+Common roles may include:
+- Artifact Registry Reader: Access to read repository items
+- Artifact Registry Writer: Access to read and write repository items
+- Cloud Build Service Account: Can perform builds
+- Kubernetes Engine Admin: Full management of k8s cluster and their API objects
+- Logs Writer: Access to write logs
+- Monitoring Metric Writer: Write-only access to metrics
+- Secret Manager Secret Accessor: Allow accessing the payload of secrets
+- Secret Manager Secret Viewer: Allows viewing metadata of all Secret Manager resources
+
+# Cloud Build
+## Setup Cloud Build
+> Prerequisite:
+> - A Google Cloud Console account & project [#Google Cloud Console](#google-cloud-console)
+
+Before proceeding with the instructions below, ensure that you:
+- Are logged into the **correct account**
+- Have the **correct project** set.
+
+### Enable Cloud Build
+1. Access the Google Cloud Platform and choose your project. If not yet created, follows [#Google Cloud Console](#google-cloud-console)
+2. Search and go to **Cloud Build** and enable the API service. Alternatively, run below command in your console
+3. Create a **Service Account** or use existing one, follows [#Service Account](#iam--admins---service-account)
+
+### Connect and Setup with GitHub Repository
+1. Navigate to **Cloud Build** -> Triggers -> Connect repository
+2. Select **GitHub** as the source repository -> Authenticate your account -> Confirm to continue
+3. Create **Cloud Build Trigger** with the conditions on specific branch
+4. Assign Cloud Build with your **Service Account**, ensuring it has all required permission
+5. In your GitHub Repository, create new `cloudbuild.yaml` for your build configuration. For more detail on how to write it, please refer to official documentation at [Cloud Build Configuration](https://docs.cloud.google.com/build/docs/configuring-builds/create-basic-configuration)
+6. Test the build workflow by commiting the changes to your repository, meeting the trigger condition above.
+
 # Google Kubernetes Engine (GKE)
-## Kubernetes Cluster setup
+## Setup Google Kubernetes Engine
 > Prerequisite:
 > - A Google Cloud Console account & project [#Google Cloud Console](#google-cloud-console)
 > - Google Cloud CLI installed and configured on your computer: [#Google Cloud CLI](#google-cloud-cli)
@@ -93,12 +148,13 @@ After creating the Google Cloud repository, we should be provided the path to th
 Use the Google Cloud SDK Shell to remotely connect to the GCP platform and apply configuration files stored locally.
 
 Before proceeding with the instructions below, ensure that you:
-- Are logged into the correct account. If not, run `gcloud auth login`.
-- Have the correct project set. If not, run `gcloud config set project <your-project>`.
+- Are logged into the **correct account**. If not, run `gcloud auth login`.
+- Have the **correct project** set. If not, run `gcloud config set project <your-project>`.
 
-### Setup Google Kubernetes Engine
+### Enable Google Kubernetes Engine
 1. Access the Google Cloud Platform and choose your project. If not yet created, follows [#Google Cloud Console](#google-cloud-console)
 2. Search and go to **Kubernetes Engine** and enable the API service. Alternatively, run below command in your console
+3. Create a **Service Account** or use existing one, follows [#Service Account](#iam--admins---service-account)
 
 ### Create Kubernetes Cluster
 
@@ -108,7 +164,20 @@ We can create a Kubernetes Cluster by providing its name, number of nodes and th
 
 The command
 ```bash
-gcloud container clusters create simple-k8s-cluster --num-nodes=1 --zone=australia-southeast1-b
+# Ex: gcloud container clusters create simple-k8s-cluster --num-nodes=1 --zone=australia-southeast1-b --service-account abc-123@myproject-12345.iam.gserviceaccount.com
+gcloud container clusters create <your-k8s-cluster> \
+    --num-nodes=1 \
+    --zone=<your-target-zone> \
+    --service-account <your-service-account>@<your-project-id>.iam.gserviceaccount.com
+
+# Optionally, you can create new cluster with more customization
+gcloud container clusters create <your-k8s-cluster> \
+    --num-nodes=1 \
+    --enable-secret-manager \
+    --enable-autoscaling --min-nodes <your-min-nodes> --max-nodes <your-max-nodes> \
+    --zone=<your-target-zone> \
+    --workload-pool=<your-project-id>.svc.id.goog \
+    --service-account <your-service-account>@<your-project-id>.iam.gserviceaccount.com
 ```
 
 After successfully created a cluster, we confirm it by listing all cluster with:
@@ -120,10 +189,11 @@ gcloud container clusters list
 
 Before using, we must authenticate `kubectl` with the newly created cluster by getting credential with following command:
 ```bash
-gcloud container clusters get-credentials simple-k8s-cluster --location=australia-southeast1-b
+# Ex: gcloud container clusters get-credentials simple-k8s-cluster --location=australia-southeast1-b
+gcloud container clusters get-credentials <your-k8s-cluster> --location=<your-project-location>
 ```
 
-## Apply Deployment and Service
+## Manually Apply Deployment and Service 
 Navigate to your project directory where the deployment `.yaml` files are stored
 ```bash
 cd <your-project-location>
