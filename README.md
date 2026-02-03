@@ -18,15 +18,15 @@ The cloud‑native application consists of three services: frontend, account, an
 - The **account and expense services** communicate with the frontend and with each other through **cluster IPs**, restricting external access.
 - The application uses a **centralized authentication system with JWT**, requiring all protected resources to verify user credentials through the dedicated account service before granting access. This ensures secure and **consistent authorization across all microservices**.
 
-# CI/CD Instruction
+# CI/CD instruction
 
-## Workflow Setup
+## Workflow setup
 The SpendWise project is designed with a fully automated CI/CD pipeline that ensures every code change is tested, validated, built, and deployed in a consistent and reproducible way. The automation is powered by **GitHub Actions** and **Google Cloud Build**, forming a seamless workflow from commit to production.
 
 ![Artifact Registry](images/artifact-registry.png)
 ![Deployed Services](images/services-gcp-ui.png)
 
-### 1. GitHub Actions — Continuous Integration (CI)
+### GitHub Actions — Continuous Integration (CI)
 > Workflows are defined in [`.github/workflows`](./.github/workflows/)
 
 Every push or pull request to the `main` branch triggers the CI workflow. This stage focuses on code quality and reliability:
@@ -35,7 +35,7 @@ Every push or pull request to the `main` branch triggers the CI workflow. This s
 - Validate that each service builds successfully
 Only when all checks pass does the pipeline allow the change to progress toward deployment. This ensures that broken code never reaches production.
 
-### 2. Cloud Build Trigger — Continuous Delivery (CD)
+### Cloud Build Trigger — Continuous Delivery (CD)
 > Workflow is defined in [`cloudbuild.yaml`](./cloudbuild.yaml)
 > 
 > For detail instruction, please refer to my documentation at [GCP Documentation#Cloud Build](./docs/GCP.md#cloud-build)
@@ -58,7 +58,7 @@ In cases where your Google Cloud account does not have sufficient permissions to
 
 The manual deployment process still uses **GitHub Actions for CI**, but replaces the automated CD stage with a manual deployment to GKE.
 
-### How It Works
+### How it works
 Generally, the workflow is: commit & push -> automated testing -> automatic image build -> automatic publish to Docker Hub -> **manually** apply the new image in GKE.
 
 - In the GitHub Actions workflow, Docker images are built and pushed to Docker Hub after all tests pass. Each image is tagged with the `GITHUB_SHA` for uniqueness and easier maintenance.
@@ -74,7 +74,7 @@ Generally, the workflow is: commit & push -> automated testing -> automatic imag
     kubectl rollout restart deployment <your-deployment-name> -n <namespace>
     ```
 
-# Application Instruction
+# Application instruction
 ## Start the application
 ### Run all with docker compose
 - Start all services:

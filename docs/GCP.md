@@ -118,7 +118,7 @@ Common roles may include:
 - Secret Manager Secret Viewer: Allows viewing metadata of all Secret Manager resources
 
 # Cloud Build
-## Setup Cloud Build
+## Set up Cloud Build
 > Prerequisite:
 > - A Google Cloud Console account & project [#Google Cloud Console](#google-cloud-console)
 
@@ -140,7 +140,7 @@ Before proceeding with the instructions below, ensure that you:
 6. Test the build workflow by commiting the changes to your repository, meeting the trigger condition above.
 
 # Google Kubernetes Engine (GKE)
-## Setup Google Kubernetes Engine
+## Set up Google Kubernetes Engine
 > Prerequisite:
 > - A Google Cloud Console account & project [#Google Cloud Console](#google-cloud-console)
 > - Google Cloud CLI installed and configured on your computer: [#Google Cloud CLI](#google-cloud-cli)
@@ -193,7 +193,7 @@ Before using, we must authenticate `kubectl` with the newly created cluster by g
 gcloud container clusters get-credentials <your-k8s-cluster> --location=<your-project-location>
 ```
 
-## Manually Apply Deployment and Service 
+## Manually deploy the application
 Navigate to your project directory where the deployment `.yaml` files are stored
 ```bash
 cd <your-project-location>
@@ -208,7 +208,7 @@ Apply the all configuration and deployments, normally the order should be:
 kubectl apply -f <filename>.yaml
 ```
 
-## Check the running pods and services
+## Check the deployed services
 ### Check the running pods
 
 If 3 replicas are specified in the deployment YAML, you should see 3 pods running. In this case, only 1 replica is used
@@ -217,6 +217,8 @@ kubectl get pods
 ```
 
 ### Check the running services
+> Alternatively, you can use **Cloud Console UI** to view the information.
+
 ```bash
 kubectl get services
 ```
@@ -309,7 +311,7 @@ gcloud container clusters delete <your-cluster-name> --zone <your-zone>
 ```
 
 # Troubleshooting
-## Kubernetes Cluster Creation
+## Kubernetes Cluster creation
 **VPC Network**
 
 If you encountered errors related to networks **(has no network named "default")**, we need to create the default Virtual Private Cloud (VPC) network and its subnets

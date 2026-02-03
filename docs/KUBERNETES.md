@@ -13,7 +13,7 @@ This is a **generic how-to documentation** for using Kubernetes with Docker Desk
         > **Start Docker Desktop > Setting > Kubernetes > Enable Kubernetes > Apply and Restart**
 
 # Usage
-## Kubernetes Cluster setup
+## Setup
 1. Activate Hyper-V:
     
     **Control Panel** > **Turn Windows Features On or Off** > **Select Hyper-V**
@@ -80,7 +80,7 @@ While working with `kubectl` commands in our local machine and manual cloud depl
     kubectl config set-context --current --namespace=<your-name-space>
     ```
 
-## Kubernetes Deployment
+## Kubernetes deployment
 ### Deployment
 1. Create `.yaml` configuration files, some common files are
     - Credential & Configuration: secrets, config maps, etc
@@ -91,8 +91,8 @@ While working with `kubectl` commands in our local machine and manual cloud depl
     kubectl apply -f <filename>.yaml
     ```
 
-### Direct Changes 
-#### Update and Restart Deployment
+### Direct changes 
+#### Update and restart deployment
 We can manually apply the changes to k8s using `set image` and `rollout restart` commands. Below code is example for account service deployment
 ```bash
 # For first time using `newtag` tag -> we need to set new image tag for deployed image
@@ -102,7 +102,7 @@ kubectl set image deployment/accountsvc-deployment accountsvc-container=tut888/s
 kubectl rollout restart deployment/accountsvc-deployment
 ```
 
-## Monitoring and Interaction
+## Monitoring and interaction
 ### Port-forwarding
 - To forward the traffic, creating a temporary tunnel from your laptop to the cluster:
     > The `<service-name>` and `<service-port>` must match with your service configuration

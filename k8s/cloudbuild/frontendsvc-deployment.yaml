@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontendsvc-container
-        image: __ARTIFACT_IMAGE__
+        image: australia-southeast1-docker.pkg.dev/spendwise-486202/spendwise/frontend:f5328c9
         ports:
         - containerPort: 3080
         env:
