@@ -1,3 +1,36 @@
+options:
+  logging: CLOUD_LOGGING_ONLY  # Send logs to Google Cloud Logging
+
+substitutions:
+  _IMAGE_NAME: "gcr.io/${PROJECT_ID}/gcpdevops-prod:${SHORT_SHA}"
+
+steps:
+  # Step 1: Build Docker image with SHA-based tagging
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${_IMAGE_NAME}', '.']
+
+  # Step 2: Push Docker image to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_IMAGE_NAME}']
+
+  # Step 3: Replace placeholder `__IMAGE__` in `gke.yaml` with actual image name 
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - "-c"
+      - |
+        sed -i "s|__IMAGE__|${_IMAGE_NAME}|g" gke.yaml
+
+  # Step 4: Deploy to Google Kubernetes Engine (GKE)
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - run
+      - --image=${_IMAGE_NAME}  # Correct image reference
+      - --location=us-central1-a  
+      - --cluster=gcp-devops-project  
+      - --namespace=development  
+      - --filename=gke.yaml
+
 # GCP cloud build for production
 options:
   logging: CLOUD_LOGGING_ONLY
@@ -57,7 +90,7 @@ steps:
   - name: 'gcr.io/cloud-builders/gke-deploy'
     args:
       - run
-      - --filename=k8s/cloudbuild/
+      - --filename=k8s/cloud/
       - --location=${_LOCATION}
       - --cluster=${_CLUSTER}
       - --namespace=${_NAMESPACE}  

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: expensesvc-container
-        image: __ARTIFACT_IMAGE__
+        image: spendwise-expense-service:latest
         ports:
         - containerPort: 3032
         env:
@@ -23,12 +23,12 @@ spec:
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
-              name: spendwise-secret
+              name: spendwise-mongo-secret
               key: mongo-user  # App gets MongoDB username from Secret
         - name: MONGO_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: spendwise-secret
+              name: spendwise-mongo-secret
               key: mongo-password  # App gets MongoDB password from Secret
         - name: MONGO_URI
           value: "mongodb://$(MONGO_USER):$(MONGO_PASSWORD)@spendwise-mongo-svc:27017/spendwise?authSource=admin"

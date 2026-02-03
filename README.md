@@ -5,9 +5,8 @@ It provides tools for tracking spending over time.
 
 The system is built with a MongoDB database, modular microservices containerized via Docker, and deployed to Google Cloud.
 
-The project is configured CI/CD workflow
-- **CI with GitHub Actions**, any update on `main` branch will automatically trigger the test.
-- **CD with Google Cloud Build**, merging changes into `main` automatically triggers a workflow that builds the application (Cloud Build), stores the images (Artifact Registry), and deploys them to production on Google Kubernetes Engine (GKE).
+The project is configured **CI with GitHub Actions**, any update on main branch will automatically trigger the test, build new image and push to **Docker Hub**
+> GKE deployment will be done manually due to limited permission of provided GCP account restricting automated deployment.
 
 ![Account](images/account.png)
 ![Expense](images/expense.png)
@@ -19,60 +18,24 @@ The cloud‑native application consists of three services: frontend, account, an
 - The application uses a **centralized authentication system with JWT**, requiring all protected resources to verify user credentials through the dedicated account service before granting access. This ensures secure and **consistent authorization across all microservices**.
 
 
-# CI/CD Instruction
-## Workflow Setup
-The SpendWise project is designed with a fully automated CI/CD pipeline that ensures every code change is tested, validated, built, and deployed in a consistent and reproducible way. The automation is powered by **GitHub Actions** and **Google Cloud Build**, forming a seamless workflow from commit to production.
+# CI-CD pipeline
 
-### 1. GitHub Actions — Continuous Integration (CI)
-Every push or pull request to the `main` branch triggers the CI workflow. This stage focuses on code quality and reliability:
-- Install dependencies for each microservice
-- Run automated tests
-- Perform linting and static analysis
-- Validate that each service builds successfully
-Only when all checks pass does the pipeline allow the change to progress toward deployment. This ensures that broken code never reaches production.
+CI/CD workflow is created using GitHub Actions. However, due to limited permission, **CI/CD workflow stop at publishing image to Docker Hub**.
+- Current workflow is: commit & push -> trigger auto testing -> auto build image -> auto publish to Docker Hub
+- The later step after publishing image is apply changes to GKE. The example of workflow configuration is commented at `.github/workflows/docker-image-accountsvc.yml`
 
-### 2. Cloud Build Trigger — Continuous Delivery (CD)
-When changes are merged into `main`, GitHub automatically notifies **Google Cloud Build** through a build trigger configured in GCP.
-
-Cloud Build then executes a multi‑step pipeline:
-- Build Docker images for the frontend, account, and expense services
-- Tag each image using the commit SHA for traceability
-- Push the images to **Artifact Registry**
-- Apply updated Kubernetes manifests to the GKE cluster
-
-This creates a fully automated delivery pipeline where every deployment is versioned, reproducible, and auditable.
-
-### 3. Deployment to GKE — Automated Rollout
-Once Cloud Build pushes the new images, it updates the running workloads in GKE:
-- GKE performs a **rolling update**, replacing old pods with new ones
-- Traffic is shifted gradually to avoid downtime
-- If a deployment fails, GKE automatically rolls back to the previous stable version
-This ensures that production deployments are safe, controlled, and fully automated.
-
-
-## Manual Deployment (Workaround)
-### Purpose
-In cases where your Google Cloud account does not have sufficient permissions to allow fully automated deployment (for example, restricted IAM roles or disabled Cloud Build triggers), SpendWise can still be deployed manually. This fallback workflow ensures that updates can be delivered reliably even without full CI/CD privileges.
-
-The manual deployment process still uses **GitHub Actions for CI**, but replaces the automated CD stage with a manual deployment to GKE.
-
-### How It Works
-Generally, the workflow is: commit & push → automated testing → automatic image build → automatic publish to Docker Hub → manually apply the new image in GKE.
-
-- In the GitHub Actions workflow, Docker images are built and pushed to Docker Hub after all tests pass. Each image is tagged with the `GITHUB_SHA` for uniqueness and easier maintenance.
-- After the image is published, update the running service in GKE using `kubectl set image` and then trigger a rollout restart. Example for the account service:
+As a workaround, below is an alternative solution for GKE deployment:
+- Use the tag `autobuild` for automated-built image by GitHub Actions, avoid using original tag in deployment `.yaml` file in case the new image has error
+- Manually apply the changes to GKE using `set image` and `rollout restart` commands. Below code is example for account service deployment
     ```bash
-    # For first time using `<SHORT_GIT_SHA>` tag -> we need to set new image tag for deployed image
-    # Ex: kubectl set image deployment/accountsvc-deployment accountsvc-container=dockeruser/sit737-account-service:1t11tt1
-
-    kubectl set image deployment/<deployment-name> <container-name>=<docker-username>/<image-name>:<SHORT_GIT_SHA>
+    # For first time using `autobuild` tag -> we need to set new image tag for deployed image
+    kubectl set image deployment/accountsvc-deployment accountsvc-container=tut888/sit737-account-service:autobuild
     
     # For later updates -> we only need to restart the deployment to re-pull new image
-    # Ex: kubectl rollout restart deployment accountsvc-deployment -n production
-    kubectl rollout restart deployment <your-deployment-name> -n <namespace>
+    kubectl rollout restart deployment/accountsvc-deployment
     ```
 
-# Application Instruction
+# Instruction
 ## Start the application
 ### Run all with docker compose
 - Start all services:
@@ -135,6 +98,37 @@ docker push <docker-username>/spendwise-frontend
 > Prerequisite: 
 > - Docker Desktop must be installed, Kubernetes must be enabled. Alternatively, any other k8s engine such as Minikube can also be used for your preference.
 > - Detail instruction please refer to my documentation at [Kubernetes Documentation](./docs/KUBERNETES.md)
+
+### Google Cloud Setup
+
+
+
+```bash
+
+# Create service account with optional display name
+gcloud iam service-accounts create <your-service-account> --display-name <your-service-account-display-name>
+# Check your created accounts
+gcloud iam service-accounts list --project <your-project-id>
+# Assign roles for service account (we need it for permission to access the resources)
+# Some common roles are: container.admin, artifactregistry.reader, logging.logWriter monitoring.metricWriter
+
+gcloud projects add-iam-policy-binding <your-project-id> \
+    --member="serviceAccount:<your-service-account>@<your-project-id>.iam.gserviceaccount.com" \
+    --role="roles/<target-role>"
+
+# Create k8s cluster
+gcloud container clusters create <your-k8s-cluster> \
+    --enable-autoscaling --min-nodes 1 --max-nodes 4 \
+    --num-nodes=1 \
+    --zone=<your-target-zone> \
+    --service-account <your-service-account>@<your-project-id>.iam.gserviceaccount.com
+```
+
+gcloud container clusters create spendwise-k8s-cluster --num-nodes=1 --zone=australia-southeast1-b --enable-autoscaling --min-nodes 1 --max-nodes 4 --service-account spendwise-gke@spendwise-486202.iam.gserviceaccount.com --enable-ip-alias
+
+# Get credentials and switch to cloud context (kubectl)
+gcloud container clusters get-credentials spendwise-k8s-cluster --location=australia-southeast1-b
+
 
 ### Deployment
 > Detail instruction for **GCP deployment** please refer to my documentation at [GCP Documentation](./docs/GCP.md)
