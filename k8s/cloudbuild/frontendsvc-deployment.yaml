@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontendsvc-container
-        image: spendwise-frontend:latest
+        image: __ARTIFACT_IMAGE__
         ports:
         - containerPort: 3080
         env:

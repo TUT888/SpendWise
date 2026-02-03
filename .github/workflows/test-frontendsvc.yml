@@ -39,7 +39,8 @@ jobs:
           PORT: 3081
           NODE_ENV: test
           MONGO_URI: mongodb://localhost:27017/spendwise
-          JWT_SECRET_KEY: MySecret
+          JWT_SECRET_KEY: TestSecret
+          SESSION_SECRET: TestSecret
           ACCOUNT_SERVICE_URL: http://localhost:3030
           EXPENSE_SERVICE_URL: http://localhost:3032
         run: | 
