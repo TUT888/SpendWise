@@ -43,3 +43,23 @@
 {"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
 {"level":"info","message":"[EXPENSE] DELETE at /: delete expense 691411d34df32b9895d7e9a2 successful","service":"expense"}
 {"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com, there isn't any registered expense","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com, there isn't any registered expense","service":"expense"}
+{"level":"info","message":"[EXPENSE] POST at /: add expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] PUT at /: update expense 69803a87e43b2ea44baf1bee successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] DELETE at /: delete expense 69803a87e43b2ea44baf1bee successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com, there isn't any registered expense","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com, there isn't any registered expense","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com, there isn't any registered expense","service":"expense"}
+{"level":"info","message":"[EXPENSE] POST at /: add expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] PUT at /: update expense 69803af9e43b2ea44baf1c05 successful","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] GET at /: get expense successful for sampletestuser222@gmail.com","service":"expense"}
+{"level":"info","message":"[EXPENSE] DELETE at /: delete expense 69803af9e43b2ea44baf1c05 successful","service":"expense"}
