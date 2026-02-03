@@ -29,7 +29,7 @@ steps:
     args:
       - run
       - --filename=k8s/cloudbuild/accountsvc-deployment.yaml
-      - --image=gcr.io/${PROJECT_ID}/account:${SHORT_SHA}
+      - --image=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/account:${SHORT_SHA}
       - --location=${_LOCATION}
       - --cluster=${_CLUSTER}
       - --namespace=${_NAMESPACE}  
@@ -53,7 +53,7 @@ steps:
     args:
       - run
       - --filename=k8s/cloudbuild/expensesvc-deployment.yaml
-      - --image=gcr.io/${PROJECT_ID}/expense:${SHORT_SHA}
+      - --image=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/expense:${SHORT_SHA}
       - --location=${_LOCATION}
       - --cluster=${_CLUSTER}
       - --namespace=${_NAMESPACE}  
@@ -76,7 +76,7 @@ steps:
     args:
       - run
       - --filename=k8s/cloudbuild/frontendsvc-deployment.yaml
-      - --image=gcr.io/${PROJECT_ID}/frontend:${SHORT_SHA}
+      - --image=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/frontend:${SHORT_SHA}
       - --location=${_LOCATION}
       - --cluster=${_CLUSTER}
       - --namespace=${_NAMESPACE}  
